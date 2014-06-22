@@ -1,0 +1,8 @@
+# Syntax Coloring for the SyRen Simplified Serial Library
+
+# Classes
+SyRenSimplified	KEYWORD1
+
+# SyRenSimplified methods
+motor	KEYWORD2
+stop	KEYWORD2

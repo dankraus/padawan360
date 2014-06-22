@@ -1,0 +1,28 @@
+# Syntax Coloring for the Sabertooth Library
+
+# Classes
+Sabertooth	KEYWORD1
+SabertoothPacket	KEYWORD1
+
+# Sabertooth methods
+address	KEYWORD2
+port	KEYWORD2
+autobaud	KEYWORD2
+
+# SabertoothPacket methods
+value	KEYWORD2
+checksum	KEYWORD2
+getBytes	KEYWORD2
+send	KEYWORD2
+
+# Common methods
+command	KEYWORD2
+motor	KEYWORD2
+drive	KEYWORD2
+turn	KEYWORD2
+setMinVoltage	KEYWORD2
+setMaxVoltage	KEYWORD2
+setBaudRate	KEYWORD2
+setDeadband	KEYWORD2
+setRamping	KEYWORD2
+setTimeout	KEYWORD2
