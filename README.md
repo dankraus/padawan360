@@ -141,9 +141,9 @@ Make sure that you use at least a 14 Guage wire between the motor and the Syren 
 
 |Sabertooth (2x25 or 2x12)   |Foot Motors   |
 |---|---|
-| M1A	  |Left Motor Terminal 1   |
-| M1B	  |Left Motor Terminal 2   |
-| M2A  |Right Motor Terminal 1  |
+| M1A	  |Right Motor Terminal 1   |
+| M1B	  |Right Motor Terminal 2   |
+| M2A  |Left Motor Terminal 1  |
 | M2B  |Left Motor Terminal 2  |
 
 People often seem to get stuck here once they power everything up and find that they push forward on the stick and it drives to left, stick to the left drives drives backwards, etc. Don't fret, motors can be wired positive/negative. It doesn't matter. Start flipping the motor connections to the Sabertooth. First flip  M1A and M1B. If that doesn't fix it, flip it back and try the other. If it still isn't right, then try flipping both sets. R2 is driven like a tank. Spin the right motor forward to go left, left motor forward to go right. Both motors forward, drive forward. Keep that in mind as you troubleshoot.
@@ -159,19 +159,33 @@ If you're using 5v to power some components on your I2C device chain, you can us
 **Note:** If you're using Lithium-Ion batteries (you oddball!) set switch #3 off also.
 
 
-### Arduino UNO I2C
+### Arduino UNO 
+Upload the padawan360_body sketch to the UNO.
 
+
+####I2C
 This is optional. If you want to trigger light effects in the dome via slipring, connect A4 SLC to SLC on the slipring board and A5 SDA on the Arduino to SDA on the slipring board.
 
 Arduino UNO R3 has separate I2C pins which is really nice but the Circuits@Home USB Shield covers them up. The R3 Board still has I2C pins at A4 and A5.
 
 
-### Dome I2C
-Connect I2C on the dome end of slipring board. SDA to A4 and SLC to A5.
-
-
 ### Controller Pairing
-Power the Arduino up. It will also power up the Receiver.  Press the big button on the receiver, it will blink. Press the little button located on the top edge of the controller. The controller blink too, then they should sync up and the blinking pattern on the controller will change and swirl. This indicates a connection and that they are paired.
+Power the Arduino up. It will also power up the Receiver.  Press the big button on the receiver, it will blink. Press the center Guide button the controller to turn the controller too. It will blibk. Press the little sync button located on the top edge of the controller. The controller blink too, then they should sync up and the blinking pattern on the controller will change and swirl. This indicates a connection and that they are paired.
 
 There's also the [Xbox Support Guide](http://support.xbox.com/en-US/xbox-on-other-devices/connections/xbox-360-wireless-gaming-receiver-windows).
 
+### Teeces Logics
+
+Upload the padawan360_dome sketch on the Teeces arduino. Connect I2C on the dome end of slipring board. SDA to A4 and SLC to A5.
+
+### HoloProjectors I2C
+
+Mike Erwin put out some great boards with Arduino bootloaders on them. Programmable! I wasn't personally thrilled with some of the lighting effects. I thought some of the colored lights didn't look too authentic. Certainly not entirely fil accurate, but that's ok. Some colored lights didn't really seem to fit random idling and blinking. Using an ISP programmer I tweaked the events more to my liking. Alarms flash yellow and red, otherwise everything else is just white or a cyan color for the Leia message. If you don't want to program them with my versions, you can tweak the `triggerI2C()` function calls in the body sketch to match the original event numbers. The originals are found on the RSeries code repo on google code.
+
+## Controls
+
+Controller guide coming soon. 
+
+## Coming Soon
+
+Dome servos via I2C support.
