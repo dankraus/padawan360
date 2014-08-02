@@ -1,12 +1,12 @@
 // =======================================================================================
-// /////////////////////////Padawan Dome Code vT.3///////////////////////////////////////
+// /////////////////////////Padawan360 Dome Code v1.0///////////////////////////////////////
 // =======================================================================================
 //                                 danf
-//                        Revised  Date: 03/11/13
+//                        Revised  Date: 08/02/2014
 //   Designed to be used with a second Arduino running the Padawan Body code
 //
 // Much of this code is from various sources including...
-// Paul Murphy (JoyMonkey), John V, Michael Erwin, Michael Smith, Roger Moolay, Chris Reiff and Brad Oakley
+// DanF, Paul Murphy (JoyMonkey), John V, Michael Erwin, Michael Smith, Roger Moolay, Chris Reiff and Brad Oakley
 //
 // EasyTransfer and PS2X_lib libraries by Bill Porter
 //
@@ -49,7 +49,7 @@ int FLDbright=1;   //front Logics
 int FPSIbright=15; //front PSI
 
 //delay time of logic display blinkyness (lower = blink faster)
-int LogicBlinkTime=75;  
+int LogicBlinkTime=75;
 
 // PSItype sets the type of our front and rear PSI's
 // 1 = Teeces original (6 LEDs of each color, arranged side by side)
@@ -92,15 +92,15 @@ Different Arduino's have different pin numbers that are used for the rear chains
  Sparkfun Pro Micro uses pins 14,16,10 for rear D,C,L
  Arduino Micro uses pins A2,A1,A0 for rear D,C,L
  */
-#if (BOARDtype==1) 
+#if (BOARDtype==1)
 #define DVAL 12
 #define CVAL 11
 #define LVAL 10
-#elif (BOARDtype==2) 
+#elif (BOARDtype==2)
 #define DVAL 14
 #define CVAL 16
 #define LVAL 10
-#elif (BOARDtype==3) 
+#elif (BOARDtype==3)
 #define DVAL A2
 #define CVAL A1
 #define LVAL A0
@@ -141,19 +141,19 @@ long psiMillis = 0;        // will store last time LED was updated
 long psiMillis2 = 0;
 long psiTime = random(1,5);
 
-#if (PSItype==4)  
+#if (PSItype==4)
 #define HPROW 5
 #define HPPAT1 B10101010
 #define HPPAT2 B01010101
 int psiRow[]={
   HPPAT1,HPPAT2,HPPAT1,HPPAT2,HPPAT1,HPPAT2,HPPAT1,HPPAT2,HPPAT1,HPPAT2};
-#elif (PSItype==3)  
+#elif (PSItype==3)
 #define HPROW 5
 #define HPPAT1 B11100000
 #define HPPAT2 B00010000
 int psiRow[]={
   HPPAT1,HPPAT1,HPPAT1,HPPAT1,HPPAT1,HPPAT2,HPPAT2,HPPAT2,HPPAT2,HPPAT2};
-#elif (PSItype==2) 
+#elif (PSItype==2)
 #define HPROW 4
 #define HPPAT1 B10101000
 #define HPPAT2 B01010100
@@ -177,11 +177,11 @@ int psiNum = 0;
 void setup() {
   //HPYservo.attach(A4);
   //HPXservo.attach(A5);
-  Serial.begin(57600);//start the library, pass in the data details and the name of the serial port. Can be Serial, Serial1, Serial2, etc. 
+  Serial.begin(57600);//start the library, pass in the data details and the name of the serial port. Can be Serial, Serial1, Serial2, etc.
 
   //receive I2C events at address 10
   Wire.begin(10);
-  Wire.onReceive(receiveEvent); 
+  Wire.onReceive(receiveEvent);
 
   pinMode(hpPin, OUTPUT);
   randomSeed(analogRead(0));
@@ -212,7 +212,7 @@ void setup() {
 // =======================================================================================
 void loop() {
 
-  ///startup display  
+  ///startup display
   if (scrollCount[0]<1)
   {
     scrollingText(0,TFLDtext); //top front text
@@ -238,51 +238,51 @@ void loop() {
 //  if (hpY==150)// down
 //  {
 //    unsigned long currentMillis = millis();
-//    if (currentMillis - HpMillis > 3)                                 
-//    { 
-//      HPYservo.write(posY);               
+//    if (currentMillis - HpMillis > 3)
+//    {
+//      HPYservo.write(posY);
 //      HpMillis = currentMillis;
 //      posY += 1;
 //      if(posY>= 150) {
 //        hpY=1;
-//      } // 150 and 30-- adjust these to your application 
+//      } // 150 and 30-- adjust these to your application
 //    }
-//  } 
+//  }
 //  if (hpY==30)  // up
-//  {                                
+//  {
 //    unsigned long currentMillis = millis();
-//    if (currentMillis - HpMillis > 3)                                 
-//    { 
-//      HPYservo.write(posY);               
+//    if (currentMillis - HpMillis > 3)
+//    {
+//      HPYservo.write(posY);
 //      HpMillis = currentMillis;
-//      posY-=1;     
+//      posY-=1;
 //      if(posY<=30) {
 //        hpY=0;
 //      } // 150 and 30-- adjust these to your application
 //    }
-//  } 
+//  }
 //
 //  if (hpX==150)// right
-//  {                                   
+//  {
 //    unsigned long currentMillis = millis();
-//    if (currentMillis - HpMillis > 3)                                 
-//    { 
-//      HPXservo.write(posX);               
-//      HpMillis = currentMillis;               
+//    if (currentMillis - HpMillis > 3)
+//    {
+//      HPXservo.write(posX);
+//      HpMillis = currentMillis;
 //      posX += 1;
 //      if(posX>= 150) {
 //        hpX=1;
-//      } // 150 and 30-- adjust these to your application 
+//      } // 150 and 30-- adjust these to your application
 //    }
-//  } 
+//  }
 //  if (hpX==30)  // left
-//  {                               
+//  {
 //    unsigned long currentMillis = millis();
-//    if (currentMillis - HpMillis > 3)                                 
-//    { 
-//      HPXservo.write(posX);               
+//    if (currentMillis - HpMillis > 3)
+//    {
+//      HPXservo.write(posX);
 //      HpMillis = currentMillis;
-//      posX-=1;     
+//      posX-=1;
 //      if(posX<=30) {
 //        hpX=0;
 //      } // 150 and 30-- adjust these to your application
@@ -299,8 +299,8 @@ void randomDisplay()
 {
   unsigned long currentMillis = millis();
 
-  if(currentMillis - previousMillis[0] > LogicBlinkTime) 
-  {   
+  if(currentMillis - previousMillis[0] > LogicBlinkTime)
+  {
     previousMillis[0] = currentMillis;
     for (byte device=0; device<3; device++)
       lcRear.setRow(device,random (0,6),random(63,256));
@@ -315,23 +315,23 @@ void leiaDisplay()
 
   if (scrollCount[3]==2200)
 
-  {    
-    for(int address=0;address<3;address++) 
-    {        
+  {
+    for(int address=0;address<3;address++)
+    {
       lcRear.setRow(address,a,255);
       lcRear.setLed(address,5,a,true);
 
       lcRear.setRow(address,b,0);
       lcRear.setLed(address,5,b,false);
     }
-    for(int address=0;address<FPSIDEV;address++) 
-    {        
+    for(int address=0;address<FPSIDEV;address++)
+    {
       lcFront.setRow(address,a,255);
       lcFront.setLed(address,5,a,true);
 
       lcFront.setRow(address,b,0);
       lcFront.setLed(address,5,b,false);
-    } 
+    }
     b=a;
     a++;
     if (a>4)
@@ -351,14 +351,14 @@ void leiaDisplay()
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 void alarmDisplay()
-{ 
+{
   unsigned long delaytime=100;
   unsigned long currentMillis = millis();
   static unsigned long swtchMillis = millis();
   static byte swtch = 0;
   if (currentMillis - swtchMillis > delaytime)
-  { 
-    if (swtch == 0) 
+  {
+    if (swtch == 0)
     {
       //we have to init all devices in a loop
       for(int row=0;row<5;row++) {
@@ -377,8 +377,8 @@ void alarmDisplay()
       swtchMillis = millis();
       swtch = 1;
     }
-    else  if (swtch == 1) 
-    {  
+    else  if (swtch == 1)
+    {
       for(int row=0;row<5;row++) {
 
         for(int address=0;address<3;address++) {
@@ -401,7 +401,7 @@ void alarmDisplay()
     displayMode = 0;
   }
 }
-////////////////////////////////////////////////////////////////////////////////////////////////// 
+//////////////////////////////////////////////////////////////////////////////////////////////////
 void alarm2Display(long playTime)
 {
   unsigned long delaytime=200;
@@ -409,8 +409,8 @@ void alarm2Display(long playTime)
   static unsigned long swtchMillis = millis();
   static byte swtch = 0;
   if (currentMillis - swtchMillis > delaytime)
-  { 
-    if (swtch == 0) 
+  {
+    if (swtch == 0)
     {
       //we have to init all devices in a loop
       for(int row=0;row<5;row++) {
@@ -428,7 +428,7 @@ void alarm2Display(long playTime)
         swtch = 1;
       }
     }
-    else  if (swtch == 1) 
+    else  if (swtch == 1)
     {
       for(int row=0;row<5;row++) {
         lcFront.setRow(0,row,248);
@@ -451,7 +451,7 @@ void alarm2Display(long playTime)
     displayMode = 0;
   }
 }
-///////////////////////////////////////////////////////////////////  
+///////////////////////////////////////////////////////////////////
 
 void showGrid(byte display)
 {
@@ -473,7 +473,7 @@ void showGrid(byte display)
       else
         lcFront.setRow(dev, row, rev(  (v_grid[display][row] & 255L<<(9*loops)) >> (9*loops)    )   );
       loops++;
-    }   
+    }
     if ( (v_grid[display][row] & 1L<<8) == 1L<<8)   col8 += 128>>row;
     if (display == 2){
       if ( (v_grid[display][row] & 1L<<17) == 1L<<17) col17 += 128>>row;
@@ -500,272 +500,272 @@ void initGrid(byte display)
 {
   for (byte row=0; row<6; row++) v_grid[display][row]=0L;
 }
-int cA[] = { 
+int cA[] = {
   B00000110,
   B00001001,
   B00001111,
   B00001001,
   B00001001 };
 
-int cB[] = { 
+int cB[] = {
   B00000111,
   B00001001,
   B00000111,
   B00001001,
   B00000111 };
 
-int cC[] = { 
+int cC[] = {
   B00000110,
   B00001001,
   B00000001,
   B00001001,
   B00000110 };
 
-int cD[] = { 
+int cD[] = {
   B0000111,
   B0001001,
   B0001001,
   B0001001,
   B0000111 };
 
-int cE[] = { 
+int cE[] = {
   B00001111,
   B00000001,
   B00000111,
   B00000001,
   B00001111 };
 
-int cF[] = { 
+int cF[] = {
   B00001111,
   B00000001,
   B00000111,
   B00000001,
   B00000001 };
 
-int cG[] = { 
+int cG[] = {
   B00001110,
   B00000001,
   B00001101,
   B00001001,
   B00000110 };
 
-int cH[] = { 
+int cH[] = {
   B00001001,
   B00001001,
   B00001111,
   B00001001,
   B00001001 };
 
-int cI[] = { 
+int cI[] = {
   B00000111,
   B00000010,
   B00000010,
   B00000010,
   B00000111 };
 
-int cJ[] = { 
+int cJ[] = {
   B00001000,
   B00001000,
   B00001000,
   B00001001,
   B00000110 };
 
-int cK[] = { 
+int cK[] = {
   B00001001,
   B00000101,
   B00000011,
   B00000101,
   B00001001 };
 
-int cL[] = { 
+int cL[] = {
   B00000001,
   B00000001,
   B00000001,
   B00000001,
   B00001111 };
 
-int cM[] = { 
+int cM[] = {
   B00010001,
   B00011011,
   B00010101,
   B00010001,
   B00010001 };
 
-int cN[] = { 
+int cN[] = {
   B00001001,
   B00001011,
   B00001101,
   B00001001,
   B00001001 };
 
-int cO[] = { 
+int cO[] = {
   B00000110,
   B00001001,
   B00001001,
   B00001001,
   B00000110 };
 
-int cP[] = { 
+int cP[] = {
   B00000111,
   B00001001,
   B00000111,
   B00000001,
   B00000001 };
 
-int cQ[] = { 
+int cQ[] = {
   B00000110,
   B00001001,
   B00001101,
   B00001001,
   B00010110 };
 
-int cR[] = { 
+int cR[] = {
   B00000111,
   B00001001,
   B00000111,
   B00000101,
   B00001001 };
 
-int cS[] = { 
+int cS[] = {
   B00001110,
   B00000001,
   B00000110,
   B00001000,
   B00000111 };
-int cT[] = { 
+int cT[] = {
   B00001111,
   B00000110,
   B00000110,
   B00000110,
   B00000110 };
-int cU[] = { 
+int cU[] = {
   B00001001,
   B00001001,
   B00001001,
   B00001001,
   B00000110 };
-int cV[] = { 
+int cV[] = {
   B00001001,
   B00001001,
   B00001001,
   B00000110,
   B00000110 };
-int cW[] = { 
+int cW[] = {
   B00010001,
   B00010001,
   B00010101,
   B00011011,
   B00010001 };
-int cX[] = { 
+int cX[] = {
   B00001001,
   B00001001,
   B00000110,
   B00001001,
   B00001001 };
-int cY[] = { 
+int cY[] = {
   B00001001,
   B00001001,
   B00000110,
   B00000110,
   B00000110 };
-int cZ[] = { 
+int cZ[] = {
   B00001111,
   B00000100,
   B00000010,
   B00000001,
   B00001111 };
-int c0[] = { 
+int c0[] = {
   B00000110,
   B00001101,
   B00001011,
   B00001011,
   B00000110 };
 //Non-letters
-int c1[] = { 
+int c1[] = {
   B00000110,
   B00000101,
   B00000100,
   B00000100,
   B00011111 };
-int c2[] = { 
+int c2[] = {
   B00001110,
   B00010001,
   B00000100,
   B00000010,
-  B00011111 };  
-int c3[] = { 
+  B00011111 };
+int c3[] = {
   B00011111,
   B00010000,
   B00011110,
   B00010000,
-  B00011111 };  
-int c4[] = { 
+  B00011111 };
+int c4[] = {
   B00001100,
   B00010100,
   B00000100,
   B00000100,
-  B00011111 };  
-int c5[] = { 
+  B00011111 };
+int c5[] = {
   B00001100,
   B00010100,
   B00000100,
   B00000100,
-  B00011111 };  
-int c6[] = { 
+  B00011111 };
+int c6[] = {
   B00001100,
   B00010100,
   B00000100,
   B00000100,
-  B00011111 };  
-int c7[] = { 
+  B00011111 };
+int c7[] = {
   B00001100,
   B00010100,
   B00000100,
   B00000100,
-  B00011111 };  
-int c8[] = { 
+  B00011111 };
+int c8[] = {
   B00001100,
   B00010100,
   B00000100,
   B00000100,
-  B00011111 };      
-int c9[] = { 
+  B00011111 };
+int c9[] = {
   B00001100,
   B00010100,
   B00000100,
   B00000100,
-  B00011111 };  
-// Heart Symbol    
-int ch[] = { 
+  B00011111 };
+// Heart Symbol
+int ch[] = {
   B00110110,
   B01001001,
   B01000001,
   B00100010,
   B00001000 };
-// Tie Fighter Symbol    
-int ct[] = { 
+// Tie Fighter Symbol
+int ct[] = {
   B00100010,
   B00101010,
   B00110110,
   B00101010,
-  B00100010 }; 
-// R2D2 Symbol    
-int cr[] = { 
+  B00100010 };
+// R2D2 Symbol
+int cr[] = {
   B00001110,
   B00011011,
   B00011111,
   B00010101,
-  B00010001 } 
-; 
-// dash - Symbol    
-int cd[] = { 
+  B00010001 }
+;
+// dash - Symbol
+int cd[] = {
   B00000000,
   B00000000,
   B00001110,
   B00000000,
   B00000000 };
 // Film Bar Symbol for use with Leia message
-int cf[] = { 
+int cf[] = {
   B00000100,
   B00000100,
   B00000100,
@@ -773,174 +773,174 @@ int cf[] = {
   B00000100 };
 
 //Blank Symbol
-int cb[] = { 
+int cb[] = {
   B00000000,
   B00000000,
   B00000000,
   B00000000,
-  B00000000 };  
+  B00000000 };
 
 //upSymbol
-int cu[] = { 
+int cu[] = {
   B00000001,
   B00000010,
   B00000100,
   B00001000,
-  B00010000 }; 
+  B00010000 };
 
 //down Symbol
-int cn[] = { 
+int cn[] = {
   B00010000,
   B00001000,
   B00000100,
   B00000010,
-  B00000001 }; 
+  B00000001 };
 void drawLetter(byte display, char let, int shift)
 {
   int *pLetter;
   switch (let)
   {
-  case 'A': 
-    pLetter=cA; 
+  case 'A':
+    pLetter=cA;
     break;
-  case 'B': 
-    pLetter=cB; 
+  case 'B':
+    pLetter=cB;
     break;
-  case 'C': 
-    pLetter=cC; 
+  case 'C':
+    pLetter=cC;
     break;
-  case 'D': 
-    pLetter=cD; 
+  case 'D':
+    pLetter=cD;
     break;
-  case 'E': 
-    pLetter=cE; 
+  case 'E':
+    pLetter=cE;
     break;
-  case 'F': 
-    pLetter=cF; 
+  case 'F':
+    pLetter=cF;
     break;
-  case 'G': 
-    pLetter=cG; 
+  case 'G':
+    pLetter=cG;
     break;
-  case 'H': 
-    pLetter=cH; 
+  case 'H':
+    pLetter=cH;
     break;
-  case 'I': 
-    pLetter=cI; 
+  case 'I':
+    pLetter=cI;
     break;
-  case 'J': 
-    pLetter=cJ; 
+  case 'J':
+    pLetter=cJ;
     break;
-  case 'K': 
-    pLetter=cK; 
+  case 'K':
+    pLetter=cK;
     break;
-  case 'L': 
-    pLetter=cL; 
+  case 'L':
+    pLetter=cL;
     break;
-  case 'M': 
-    pLetter=cM; 
+  case 'M':
+    pLetter=cM;
     break;
-  case 'N': 
-    pLetter=cN; 
+  case 'N':
+    pLetter=cN;
     break;
-  case 'O': 
-    pLetter=cO; 
+  case 'O':
+    pLetter=cO;
     break;
-  case 'P': 
-    pLetter=cP; 
+  case 'P':
+    pLetter=cP;
     break;
-  case 'Q': 
-    pLetter=cQ; 
+  case 'Q':
+    pLetter=cQ;
     break;
-  case 'R': 
-    pLetter=cR; 
+  case 'R':
+    pLetter=cR;
     break;
-  case 'S': 
-    pLetter=cS; 
+  case 'S':
+    pLetter=cS;
     break;
-  case 'T': 
-    pLetter=cT; 
+  case 'T':
+    pLetter=cT;
     break;
-  case 'U': 
-    pLetter=cU; 
+  case 'U':
+    pLetter=cU;
     break;
-  case 'V': 
-    pLetter=cV; 
+  case 'V':
+    pLetter=cV;
     break;
-  case 'W': 
-    pLetter=cW; 
+  case 'W':
+    pLetter=cW;
     break;
-  case 'X': 
-    pLetter=cX; 
+  case 'X':
+    pLetter=cX;
     break;
-  case 'Y': 
-    pLetter=cY; 
+  case 'Y':
+    pLetter=cY;
     break;
-  case 'Z': 
-    pLetter=cZ; 
+  case 'Z':
+    pLetter=cZ;
     break;
     //non-letters
     //numbers
-  case '0': 
-    pLetter=c0; 
+  case '0':
+    pLetter=c0;
     break;
-  case '1': 
-    pLetter=c1; 
+  case '1':
+    pLetter=c1;
     break;
-  case '2': 
-    pLetter=c2; 
+  case '2':
+    pLetter=c2;
     break;
-  case '3': 
-    pLetter=c3; 
+  case '3':
+    pLetter=c3;
     break;
-  case '4': 
-    pLetter=c4; 
+  case '4':
+    pLetter=c4;
     break;
-  case '5': 
-    pLetter=c5; 
+  case '5':
+    pLetter=c5;
     break;
-  case '6': 
-    pLetter=c6; 
+  case '6':
+    pLetter=c6;
     break;
-  case '7': 
-    pLetter=c7; 
+  case '7':
+    pLetter=c7;
     break;
-  case '8': 
-    pLetter=c8; 
+  case '8':
+    pLetter=c8;
     break;
-  case '9': 
-    pLetter=c9; 
+  case '9':
+    pLetter=c9;
     break;
     //special characters
-  case '*': 
-    pLetter=ch; 
+  case '*':
+    pLetter=ch;
     break;
-  case '#': 
-    pLetter=ct; 
+  case '#':
+    pLetter=ct;
     break;
-  case '@': 
-    pLetter=cr; 
+  case '@':
+    pLetter=cr;
     break;
-  case '-': 
-    pLetter=cd; 
+  case '-':
+    pLetter=cd;
     break;
-  case '|': 
-    pLetter=cf; 
+  case '|':
+    pLetter=cf;
     break;
     //whitespace
-  case ' ': 
-    pLetter=cb; 
+  case ' ':
+    pLetter=cb;
     break;
-  case '<': 
-    pLetter=cu; 
+  case '<':
+    pLetter=cu;
     break;
-  case '>': 
-    pLetter=cn; 
+  case '>':
+    pLetter=cn;
     break;
   default:
     return;
   }
   //loop thru rows of the letter
-  for (byte i=0; i<5; i++) 
+  for (byte i=0; i<5; i++)
   {
     if (shift>0) //positive shift means letter is slid to the right on the display
       v_grid[display][i] += (long)pLetter[i] << shift;
@@ -954,8 +954,8 @@ void scrollingText(byte display, char text[])
 {
   unsigned long currentMillis = millis();
 
-  if((currentMillis - previousMillis[display]) >= scrollSpeed) 
-  {   
+  if((currentMillis - previousMillis[display]) >= scrollSpeed)
+  {
     initGrid(display);
     previousMillis[display] = currentMillis;
 
@@ -1005,8 +1005,8 @@ void flicker()
   unsigned long currentMillis = millis();
 
   if(currentMillis - previousMillis[1] > flick) {
-    // save the last time you blinked the LED 
-    previousMillis[1] = currentMillis;   
+    // save the last time you blinked the LED
+    previousMillis[1] = currentMillis;
 
     analogWrite(hpPin, random(255));
     flick = random(100);
@@ -1014,9 +1014,9 @@ void flicker()
 }
 //////////////////////////////////////////////////////////////////////////////////////
 
-void randomPsi() 
-{   
-  unsigned long currentMillis = millis();  
+void randomPsi()
+{
+  unsigned long currentMillis = millis();
   if(currentMillis - psiMillis > psiTime*500) // delay between .5 to 5 seconds
   {
     psiMillis = currentMillis;
@@ -1037,8 +1037,8 @@ void randomPsi()
   }
 
   unsigned long currentMillis2 = millis();
-  if(currentMillis2 - psiMillis2 > wipe) 
-  { 
+  if(currentMillis2 - psiMillis2 > wipe)
+  {
     if (psiNum<HPROW && psiColor == 5)
     {
       psiMillis2 = currentMillis2;
@@ -1063,9 +1063,9 @@ void randomPsi()
 void autoHP()
 {
   if (hpY!=150&&hpY!=30&&hpX!=150&&hpX!=30&&displayMode!=5)
-  {  
+  {
     unsigned long currentMillis = millis();
-    if (currentMillis - HpMillis > twitch)                                 
+    if (currentMillis - HpMillis > twitch)
     {
       hpY=random(31,150);
       hpX=random(31,150);
@@ -1073,7 +1073,7 @@ void autoHP()
       twitch = random(700,10500);
     }
   }
-} 
+}
 // =======================================================================================
 
 // =======================================================================================
@@ -1082,7 +1082,7 @@ void autoHP()
 // this function is registered as an event, see setup()
 void receiveEvent(int eventCode) {
   int i2cEvent=Wire.read();
-  
+
   sei();
   switch (i2cEvent) {
     case 1:
@@ -1097,7 +1097,7 @@ void receiveEvent(int eventCode) {
      alarm2Display(175000);
      //randomDisplay();
      break;
-   default: 
+   default:
      // if nothing else matches, do the default
      //randomDisplay();
      break;

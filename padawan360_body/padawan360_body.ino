@@ -426,7 +426,7 @@ void loop(){
 
   // X Button and X combo Buttons
   if(Xbox.getButtonClick(X, 0)){
-    // leia message
+    // leia message L1+X
     if(Xbox.getButtonPress(L1, 0)){
       mp3Trigger.play(5);
       //logic lights, leia message
@@ -465,10 +465,10 @@ void loop(){
   }
 
 
-  // Change drivespeed
+  // Change drivespeed if drive is eabled
   // Press Right Analog Stick (R3)
   // Set LEDs for speed - 1 LED, Low. 2 LED - Med. 3 LED High
-  if(Xbox.getButtonClick(R3, 0)) {
+  if(Xbox.getButtonClick(R3, 0) && isDriveEnabled == 1) {
     //if in lowest speed
     if(drivespeed == drivespeed1){
       //change to medium speed and play sound 3-tone
@@ -536,7 +536,7 @@ void loop(){
       // stick is in dead zone - don't turn
       turnThrottle = 0;
     }
-    ST.turn(turnThrottle);
+    ST.turn(-turnThrottle);
     ST.drive(driveThrottle);
   }
 
