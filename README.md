@@ -9,6 +9,8 @@ This is a control system for 1:1 scale remote control R2-D2 powered by Arduinos 
 
 These sketches are heavily based on DanF's Padawan control system that uses Playstation 2 controllers. I found the PS2 controllers to become a bit unreliable and they are increasingly more difficult to come by. I'm also taking advantage of the LEDs around the center Guide button to indicate state of the drive mode (disengaged, engaged w/ speed setting).
 
+The Xbox 360 Controller is over 2.4ghz and uses frequency hopping to avoid interference. At DroidConIII 2014 I was at least over 100ft from the Droid and maintained connection through several walls including two bathrooms with plumbing and tiles. I tested by spinning the dome. When I got out of range, the dome stopped spinning. When I walked a few feet forward, it automatically reconnected and I was able to spin the dome again. Connection status was displayed via LEDs on the controller.
+
 I developed Padawan360 (named with permission from DanF) to use some more easily accessible components with no soldering, wire stripping, etc. It's a bit more plug and play.
 
 A lot of the instructions here are relevant to the original [Padawan PS2](http://astromech.net/droidwiki/index.php?title=PADAWAN) setup instructions. A good chunk of the documentation is reproduced here.
