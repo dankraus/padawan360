@@ -48,15 +48,14 @@ A lot of the instructions here are relevant to the original [Padawan PS2](http:/
 - ### Amp and Speakers
 	Up to you and how big and loud you want. I have a small speaker and a $20 amp from Pyle. A ground loop isolator might be necessary to protect the MP3 trigger and eliminate buzzing from the speaker.
 
-- ### Slipring
-  Used to pass power up from the body to the dome and also signa for I2C.
-
 - ### Teeces lights
 	The sketch provided here will work for version 3. Use the regular setup and installation instructions but include pinouts for pins A4 and A5 if you want I2C control.
 
 - #### Optional
 ##### RSeries RGB HPs.	
 Sketches provided are for I2C holoprojector boards. The front uses the one with the servo pinouts although the sketch doesn't servo control of the HPs. The top and rear HP are just the regular I2C controlled boards.
+##### Slipring
+  Used to pass power up from the body to the dome and also signal for I2C to control dome lights.
 
 ## Setup
 
