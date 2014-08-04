@@ -7,7 +7,7 @@ Still to come, full set up instructions.
 ## Intro
 This is a control system for 1:1 scale remote control R2-D2 powered by Arduinos and controlled with an Xbox 360 Controller. It triggers lights, sounds, and controls foot drive and dome drive motors. It also supports I2C to trigger events in the dome lights or can be extended to interact with anything else that supports I2C
 
-These sketches are heavily based on DanF's Padawan control system that uses Playstation 2 controllers. I found the PS2 controllers to become a bit unreliable and they are increasingly more difficult to come by.
+These sketches are heavily based on DanF's Padawan control system that uses Playstation 2 controllers. I found the PS2 controllers to become a bit unreliable and they are increasingly more difficult to come by. I'm also taking advantage of the LEDs around the center Guide button to indicate state of the drive mode (disengaged, engaged w/ speed setting).
 
 I developed Padawan360 (named with permission from DanF) to use some more easily accessible components with no soldering, wire stripping, etc. It's a bit more plug and play.
 
@@ -53,8 +53,8 @@ A lot of the instructions here are relevant to the original [Padawan PS2](http:/
 	The sketch provided here will work for version 3. Use the regular setup and installation instructions but include pinouts for pins A4 and A5 if you want I2C control.
 
 - #### Optional
-	- ##### RSeries RGB HPs.
-	Sketches provided are for I2C holoprojector boards. The front uses the one with the servo pinouts although the sketch doesn't servo control of the HPs. The top and rear HP are just the regular I2C controlled boards.
+##### RSeries RGB HPs.	
+Sketches provided are for I2C holoprojector boards. The front uses the one with the servo pinouts although the sketch doesn't servo control of the HPs. The top and rear HP are just the regular I2C controlled boards.
 
 ## Setup
 
@@ -184,7 +184,7 @@ Mike Erwin put out some great boards with Arduino bootloaders on them. Programma
 
 ## Controls
 
-Controller guide coming soon. 
+Controller guide coming soon. For now, refer to Padawan PS2 controller guide. It's the same button layout, just with a 360 controller.
 
 ## Coming Soon
 
