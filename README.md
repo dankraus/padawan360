@@ -1,7 +1,7 @@
 Padawan360
 ====
 
-Still to come, full set up instructions.
+Still to come, controller layout and diagram, servo control.
 
 
 ## Intro
@@ -181,7 +181,7 @@ Upload the padawan360_dome sketch on the Teeces arduino. Connect I2C on the dome
 
 ### HoloProjectors I2C
 
-Mike Erwin put out some great boards with Arduino bootloaders on them. Programmable! I wasn't personally thrilled with some of the lighting effects. I thought some of the colored lights didn't look too authentic. Certainly not entirely fil accurate, but that's ok. Some colored lights didn't really seem to fit random idling and blinking. Using an ISP programmer I tweaked the events more to my liking. Alarms flash yellow and red, otherwise everything else is just white or a cyan color for the Leia message. If you don't want to program them with my versions, you can tweak the `triggerI2C()` function calls in the body sketch to match the original event numbers. The originals are found on the RSeries code repo on google code.
+Mike Erwin put out some great boards with Arduino bootloaders on them. Programmable! I wasn't personally thrilled with some of the lighting effects. I thought some of the colored lights didn't look too authentic. Certainly not entirely fil accurate, but that's ok. Some colored lights didn't really seem to fit random idling and blinking. Using an ISP programmer I tweaked the events more to my liking. Alarms flash yellow and red, otherwise everything else is just white or a cyan color for the Leia message. If you don't want to program them with my versions, you can tweak the `triggerI2C(deviceID, eventNumer)` function calls in the body sketch to match the original event numbers. The originals are found on the RSeries code repo on google code.
 
 ## Controls
 
