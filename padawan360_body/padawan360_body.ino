@@ -39,25 +39,25 @@ Placed a 10K ohm resistor between S1 & GND on the SyRen 10 itself
 //************************** Set speed and turn speeds here************************************//
 
 //set these 3 to whatever speeds work for you. 0-stop, 127-full speed.
-byte drivespeed1 = 50;
+const byte DRIVESPEED1 = 50;
 //Recommend beginner: 50 to 75, experienced: 100 to 127, I like 100.
-byte drivespeed2 = 100;
+const byte DRIVESPEED2 = 100;
 //Set to 0 if you only want 2 speeds.
-byte drivespeed3 = 127;
+const byte DRIVESPEED3 = 127;
 
-byte drivespeed = drivespeed1;
+byte drivespeed = DRIVESPEED1;
 
 // the higher this number the faster the droid will spin in place, lower - easier to control.
 // Recommend beginner: 40 to 50, experienced: 50 $ up, I like 70
-byte turnspeed = 70;
+const byte TURNSPEED = 70;
 // If using a speed controller for the dome, sets the top speed. You'll want to vary it potenitally
 // depending on your motor. My Pittman is really fast so I dial this down a ways from top speed.
 // Use a number up to 127 for serial
-byte domespeed = 80;
+const byte DOMESPEED = 80;
 
 // Ramping- the lower this number the longer R2 will take to speedup or slow down,
 // change this by incriments of 1
-byte ramping = 5;
+const byte RAMPING = 5;
 
 // Compensation is for deadband/deadzone checking. There's a little play in the neutral zone
 // which gets a reading of a value of something other than 0 when you're not moving the stick.
@@ -66,15 +66,15 @@ byte ramping = 5;
 // direct method calls against the Syren/Sabertooth library itself but it's not supported in all
 // serial modes so just manage and check it in software here
 // use the lowest number with no drift
-// domeDeadZoneRange for the left stick, driveDeadZoneRange for the left stick
-byte domeDeadZoneRange = 20;
-byte driveDeadZoneRange = 20;
+// DOMEDEADZONERANGE for the left stick, DRIVEDEADZONERANGE for the left stick
+const byte DOMEDEADZONERANGE = 20;
+const byte DRIVEDEADZONERANGE = 20;
 
 // Set the baude rate for the Syren motor controller
 // for packetized options are: 2400, 9600, 19200 and 38400. I think you need to pick one that works
 // and I think it varies across different firmware versions.
 // for simple serial use 9600
-int domeBaudeRate = 2400;
+const int DOMEBAUDRATE = 2400;
 
 // Comment the SYRENSIMPLE out for packetized serial connection to Syren - Recomended.
 // I've never tested Syrene Simple, it's a carry-over from DanF's library.
@@ -113,47 +113,46 @@ Sabertooth SyR(128, SyRSerial);
 // 0 = full volume, 255 off
 byte vol = 20;
 // 0 = drive motors off ( right stick disabled ) at start
-byte isDriveEnabled = 0;
+boolean isDriveEnabled = false;
 
 // Automated function variables
 // Used as a boolean to turn on/off automated functions like periodic random sounds and periodic dome turns
-byte isInAutomationMode = 0;
+boolean isInAutomationMode = false;
 unsigned long automateMillis = 0;
 byte automateDelay = random(5,20);// set this to min and max seconds between sounds
 //How much the dome may turn during automation.
 int turnDirection = 20;
 // Action number used to randomly choose a sound effect or a dome turn
 byte automateAction = 0;
-unsigned long DriveMillis = 0;
-int driveThrottle = 0;
-int sticknum = 0;
-int domeThrottle = 0;
-int turnThrottle = 0;
+char driveThrottle = 0;
+char sticknum = 0;
+char domeThrottle = 0;
+char turnThrottle = 0;
 
-int firstLoadOnConnect = 0;
+boolean firstLoadOnConnect = false;
 
 // this is legacy right now. The rest of the sketch isn't set to send any of this
 // data to another arduino like the original Padawan sketch does
 // right now just using it to track whether or not the HP light is on so we can
 // fire the correct I2C event to turn on/off the HP light.
-struct SEND_DATA_STRUCTURE{
-  //put your variable definitions here for the data you want to send
-  //THIS MUST BE EXACTLY THE SAME ON THE OTHER ARDUINO
-  int hpx; // hp movement
-  int hpy; // hp movement
-  int hpl; // hp light
-  int hpa; // hp automation
-  int dsp; // 0 = random, 1 = alarm, 5 = leia, 11 = alarm2, 100 = no change
-};
+//struct SEND_DATA_STRUCTURE{
+//  //put your variable definitions here for the data you want to send
+//  //THIS MUST BE EXACTLY THE SAME ON THE OTHER ARDUINO
+//  int hpl; // hp light
+//  int dsp; // 0 = random, 1 = alarm, 5 = leia, 11 = alarm2, 100 = no change
+//};
+//SEND_DATA_STRUCTURE domeData;//give a name to the group of data
 
-SEND_DATA_STRUCTURE domeData;//give a name to the group of data
+boolean isHPOn = false;
+
+
 
 MP3Trigger mp3Trigger;
 USB Usb;
 XBOXRECV Xbox(&Usb);
 
 void setup(){
-  SyRSerial.begin(domeBaudeRate);
+  SyRSerial.begin(DOMEBAUDRATE);
   #if defined(SYRENSIMPLE)
     SyR.motor(0);
   #else
@@ -217,51 +216,51 @@ void loop(){
     ST.drive(0);
     ST.turn(0);
     SyR.motor(1,0);
-    firstLoadOnConnect = 0;
+    firstLoadOnConnect = false;
     return;
   }
 
   // After the controller connects, Blink all the LEDs so we know drives are disengaged at start
-  if(firstLoadOnConnect == 0){
-    firstLoadOnConnect = 1;
+  if(!firstLoadOnConnect){
+    firstLoadOnConnect = true;
     mp3Trigger.play(21);
     Xbox.setLedMode(ROTATING, 0);
   }
 
   // enable / disable right stick (droid movement) & play a sound to signal motor state
   if(Xbox.getButtonClick(START, 0)) {
-    if (isDriveEnabled < 1){
-      isDriveEnabled = 1;
+    if(isDriveEnabled){
+      isDriveEnabled = false;
+      Xbox.setLedMode(ROTATING, 0);
+      mp3Trigger.play(53);
+    } else {
+      isDriveEnabled = true;
       mp3Trigger.play(52);
       // //When the drive is enabled, set our LED accordingly to indicate speed
-      if(drivespeed == drivespeed1){
+      if(drivespeed == DRIVESPEED1){
         Xbox.setLedOn(LED1, 0);
-      } else if(drivespeed == drivespeed2 && (drivespeed3!=0)){
+      } else if(drivespeed == DRIVESPEED2 && (DRIVESPEED3!=0)){
         Xbox.setLedOn(LED2, 0);
       } else {
         Xbox.setLedOn(LED3, 0);
       }
-    } else {
-      isDriveEnabled = 0;
-      Xbox.setLedMode(ROTATING, 0);
-      mp3Trigger.play(53);
     }
   }
 
   //Toggle automation mode with the BACK button
   if(Xbox.getButtonClick(BACK, 0)) {
-    if (isInAutomationMode < 1){
-      isInAutomationMode = 1;
-      mp3Trigger.play(52);
-    } else {
-      isInAutomationMode = 0;
+    if(isInAutomationMode){
+      isInAutomationMode = false;
       automateAction = 0;
       mp3Trigger.play(53);
+    } else {
+      isInAutomationMode = true;
+      mp3Trigger.play(52);
     }
   }
 
   // Plays random sounds or dome movements for automations when in automation mode
-  if(isInAutomationMode == 1){
+  if(isInAutomationMode){
     unsigned long currentMillis = millis();
 
     if(currentMillis - automateMillis > (automateDelay*1000)){
@@ -451,13 +450,13 @@ void loop(){
   // turn hp light on & off with Left Analog Stick Press (L3)
   if(Xbox.getButtonClick(L3, 0))  {
     // if hp light is on, turn it off
-    if(domeData.hpl == 1){
-      domeData.hpl = 0;
+    if(isHPOn){
+      isHPOn = false;
       // turn hp light off
       // Front HPEvent 2 - ledOFF - I2C
       triggerI2C(25, 2);
     } else {
-      domeData.hpl = 1;
+      isHPOn = true;
       // turn hp light on
       // Front HPEvent 4 - whiteOn - I2C
       triggerI2C(25, 1);
@@ -468,24 +467,24 @@ void loop(){
   // Change drivespeed if drive is eabled
   // Press Right Analog Stick (R3)
   // Set LEDs for speed - 1 LED, Low. 2 LED - Med. 3 LED High
-  if(Xbox.getButtonClick(R3, 0) && isDriveEnabled == 1) {
+  if(Xbox.getButtonClick(R3, 0) && isDriveEnabled) {
     //if in lowest speed
-    if(drivespeed == drivespeed1){
+    if(drivespeed == DRIVESPEED1){
       //change to medium speed and play sound 3-tone
-      drivespeed = drivespeed2;
+      drivespeed = DRIVESPEED2;
       Xbox.setLedOn(LED2, 0);
       mp3Trigger.play(53);
       triggerI2C(10, 22);
-    } else if(drivespeed == drivespeed2 && (drivespeed3!=0)){
+    } else if(drivespeed == DRIVESPEED2 && (DRIVESPEED3!=0)){
       //change to high speed and play sound scream
-      drivespeed = drivespeed3;
+      drivespeed = DRIVESPEED3;
       Xbox.setLedOn(LED3, 0);
       mp3Trigger.play(1);
       triggerI2C(10, 23);
     } else {
       //we must be in high speed
       //change to low speed and play sound 2-tone
-      drivespeed = drivespeed1;
+      drivespeed = DRIVESPEED1;
       Xbox.setLedOn(LED1, 0);
       mp3Trigger.play(52);
       triggerI2C(10, 21);
@@ -498,19 +497,19 @@ void loop(){
   // Sabertooth runs at 8 bit signed. -127 to 127 for speed (full speed reverse and  full speed forward)
   // Map the 360 stick values to our min/max current drive speed
   sticknum = (map(Xbox.getAnalogHat(RightHatY, 0), -32768, 32767, -drivespeed, drivespeed));
-  if(sticknum > -driveDeadZoneRange && sticknum < driveDeadZoneRange){
+  if(sticknum > -DRIVEDEADZONERANGE && sticknum < DRIVEDEADZONERANGE){
     // stick is in dead zone - don't drive
     driveThrottle = 0;
   } else {
     if(driveThrottle < sticknum){
-      if(sticknum - driveThrottle < (ramping+1) ){
-        driveThrottle+=ramping;
+      if(sticknum - driveThrottle < (RAMPING+1) ){
+        driveThrottle+=RAMPING;
       } else {
         driveThrottle = sticknum;
       }
     } else if(driveThrottle > sticknum){
-      if(driveThrottle - sticknum < (ramping+1) ){
-        driveThrottle-=ramping;
+      if(driveThrottle - sticknum < (RAMPING+1) ){
+        driveThrottle-=RAMPING;
       } else {
         driveThrottle = sticknum;
       }
@@ -519,20 +518,20 @@ void loop(){
 
   turnThrottle = map(Xbox.getAnalogHat(RightHatX, 0), -32768, 32767, 0, 255);
   if(turnThrottle <= 200 && turnThrottle >= 54)
-    turnThrottle = map(turnThrottle, 54, 200, -(turnspeed/3), (turnspeed/3));
+    turnThrottle = map(turnThrottle, 54, 200, -(TURNSPEED/3), (TURNSPEED/3));
   else if(turnThrottle > 200)
-    turnThrottle = map(turnThrottle, 201, 255, turnspeed/3, turnspeed);
+    turnThrottle = map(turnThrottle, 201, 255, TURNSPEED/3, TURNSPEED);
   else if(turnThrottle < 54)
-    turnThrottle = map(turnThrottle, 0, 53, -turnspeed, -(turnspeed/3));
+    turnThrottle = map(turnThrottle, 0, 53, -TURNSPEED, -(TURNSPEED/3));
 
 
 
   // DRIVE!
   // right stick (drive)
-  if (isDriveEnabled == 1){
+  if (isDriveEnabled){
     // Only do deadzone check for turning here. Our Drive throttle speed has some math applied
-    // for ramping and stuff, so just keep it separate here
-    if(turnThrottle > -driveDeadZoneRange && turnThrottle < driveDeadZoneRange){
+    // for RAMPING and stuff, so just keep it separate here
+    if(turnThrottle > -DRIVEDEADZONERANGE && turnThrottle < DRIVEDEADZONERANGE){
       // stick is in dead zone - don't turn
       turnThrottle = 0;
     }
@@ -541,8 +540,8 @@ void loop(){
   }
 
   // DOME DRIVE!
-  domeThrottle = (map(Xbox.getAnalogHat(LeftHatX, 0), -32768, 32767, -domespeed, domespeed));
-  if (domeThrottle > -domeDeadZoneRange && domeThrottle < domeDeadZoneRange){
+  domeThrottle = (map(Xbox.getAnalogHat(LeftHatX, 0), -32768, 32767, -DOMESPEED, DOMESPEED));
+  if (domeThrottle > -DOMEDEADZONERANGE && domeThrottle < DOMEDEADZONERANGE){
     //stick in dead zone - don't spin dome
     domeThrottle = 0;
   }
@@ -556,8 +555,8 @@ void loop(){
   #endif
 } // END loop()
 
-void triggerI2C(int deviceID, int eventID){
-  Wire.beginTransmission(deviceID);
-  Wire.write(eventID);
-  Wire.endTransmission();
+void triggerI2C(byte deviceID, byte eventID){
+  //Wire.beginTransmission(deviceID);
+  //Wire.write(eventID);
+  //Wire.endTransmission();
 }
