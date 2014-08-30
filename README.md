@@ -126,6 +126,11 @@ In some cases, we've noticed that the dome may behave eratically after starting 
 
 Make sure that you use at least a 14 Guage wire between the motor and the Syren 10. Anything hire can cause problems (fire!)
 
+#### Dome FAQs
+Q: My Dome just randomly spins!
+
+A: Depending on the firmware on the Syren, sometimes you need to change the serial baud rate it communicates at. Change this like `const int DOMEBAUDRATE = 2400;` For packetized options are: 2400, 9600, 19200 and 38400
+
 
 ### Foot Drive
 
@@ -185,7 +190,22 @@ Mike Erwin put out some great boards with Arduino bootloaders on them. Programma
 
 ## Controls
 
+### Controller LED Status
+
+
+|LEDs Around Center Guide Button   |Description   |
+|---|---|
+| 4 Flashing/Blinking in Unison  | Looking for connection to receiver   |
+| Rotating/Spinning pattern  | Connected to receiver. Foot motors disengaged  |
+| Single LED Top Left - Steady  | Foot Motors Engaged. Speed 1  |
+| Single LED Top Right - Steady  | Foot Motors Engaged. Speed 2  |
+| Single LED Bottom Left - Steady   | Foot Motors Engaged. Speed 3  |
+
+
+### Button Guide
 Controller guide coming soon. For now, refer to Padawan PS2 controller guide. It's the same button layout, just with a 360 controller.
+
+Press Start button to engage motors!
 
 ## Coming Soon
 
