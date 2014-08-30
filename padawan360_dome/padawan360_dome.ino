@@ -341,6 +341,7 @@ void setup()
 
   // Scrolling is done, switch to random mode
   resetDisplays();
+  displayEffect = domeData.dsp;
 
 }///end setup
 
