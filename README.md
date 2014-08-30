@@ -131,8 +131,8 @@ Make sure that you use at least a 14 Guage wire between the motor and the Syren 
 
 |Sabertooth (2x25 or 2x12)   |Arduino UNO   |
 |---|---|
-| S1  |7   |
-| S2  |6   |
+| S1  |4   |
+| S2  |3   |
 | 0v  |GND   |
 
 |Sabertooth (2x25 or 2x12)   |Battery   |
