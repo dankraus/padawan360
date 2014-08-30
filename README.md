@@ -131,6 +131,10 @@ Q: My Dome just randomly spins!
 
 A: Depending on the firmware on the Syren, sometimes you need to change the serial baud rate it communicates at. Change this like `const int DOMEBAUDRATE = 2400;` For packetized options are: 2400, 9600, 19200 and 38400
 
+Q: The left analog stick is centered but the dome still spins!
+
+A: You need to just adjust the deadzone `const byte DOMEDEADZONERANGE = 20;` Increase this number until you can let the stick go neutral and nothing moves. The code has some more info on that above that line.
+
 
 ### Foot Drive
 
@@ -163,6 +167,12 @@ Sabertooth 2x25 / 2x12 dip switches should 1 & 2 OFF and all others ON if using 
 If you're using 5v to power some components on your I2C device chain, you can use the 5V terminal on the Sabertooth and connect to the positive I2C pin header on the slipring board and 0V on the Sabertooth to GND on the slipring board.
 
 **Note:** If you're using Lithium-Ion batteries (you oddball!) set switch #3 off also.
+
+#### Drive FAQs
+
+Q: The right analog stick is centered but it still drives(turns, drives forward, drives reverse, etc)!
+
+A: You need to just adjust the deadzone `const byte DRIVEDEADZONERANGE = 20;` Increase this number until you can let the stick go neutral and nothing moves. The code has some more info on that above that line.
 
 
 ### Arduino UNO 
