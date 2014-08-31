@@ -15,6 +15,8 @@ I developed Padawan360 (named with permission from DanF) to use some more easily
 
 A lot of the instructions here are relevant to the original [Padawan PS2](http://astromech.net/droidwiki/index.php?title=PADAWAN) setup instructions. A good chunk of the documentation is reproduced here.
 
+[The thread on Astromech for Padawan360 can be found here ](http://astromech.net/forums/showthread.php?t=19263_)
+
 ## Components
 
 - ### Arduino Uno
