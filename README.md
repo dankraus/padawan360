@@ -19,8 +19,11 @@ A lot of the instructions here are relevant to the original [Padawan PS2](http:/
 
 ## Components
 
-- ### Arduino Uno
+- ### Arduino Uno (Option 1)
 	For the body. Main Arduino that runs everything. Receivers, code, connection to MP3 trigger, etc runs through here. SparkFun, RadioShack, Amazon, you can find these everywhere these days.
+
+- ### Arduino Mega (Option 2)
+	I run a Mega for the body. It uses the hardware serial pins. Better performance and memory utilization. With the Mega, I can also support I2C a bit better.
 
 - ### USB Shield
 	Sourced from [Circuits@Home](http://www.circuitsathome.com). It comes in two variants, one without shield headers soldered, and one without them soldered. Difference in $5.
@@ -54,7 +57,7 @@ A lot of the instructions here are relevant to the original [Padawan PS2](http:/
 	The sketch provided here will work for version 3. Use the regular setup and installation instructions but include pinouts for pins A4 and A5 if you want I2C control.
 
 - #### Optional
-##### RSeries RGB HPs.	
+##### RSeries RGB HPs.
 Sketches provided are for I2C holoprojector boards. The front uses the one with the servo pinouts although the sketch doesn't servo control of the HPs. The top and rear HP are just the regular I2C controlled boards.
 ##### Slipring
   Used to pass power up from the body to the dome and also signal for I2C to control dome lights.
@@ -98,6 +101,12 @@ Connect the pins for the Syren Motor Controller
 |Syren10   |Arduino UNO   |
 |---|---|
 | S1  |5   |
+| 0v  |GND   |
+
+|Syren10   |Arduino Mega   |
+|---|---|
+| S1  |Serial2 (Rx2)  |
+| S2  |Serial2 (Tx2)   |
 | 0v  |GND   |
 
 |Syren10   |Battery   |
@@ -146,6 +155,12 @@ A: You need to just adjust the deadzone `const byte DOMEDEADZONERANGE = 20;` Inc
 | S2  |3   |
 | 0v  |GND   |
 
+|Sabertooth (2x25 or 2x12)   |Arduino Mega   |
+|---|---|
+| S1  |Serial1 (Rx1)  |
+| S2  |Serial1 (Tx1)   |
+| 0v  |GND   |
+
 |Sabertooth (2x25 or 2x12)   |Battery   |
 |---|---|
 | B+  |Positve   |
@@ -177,7 +192,7 @@ Q: The right analog stick is centered but it still drives(turns, drives forward,
 A: You need to just adjust the deadzone `const byte DRIVEDEADZONERANGE = 20;` Increase this number until you can let the stick go neutral and nothing moves. The code has some more info on that above that line.
 
 
-### Arduino UNO 
+### Arduino UNO
 Upload the padawan360_body sketch to the UNO.
 
 
@@ -185,6 +200,8 @@ Upload the padawan360_body sketch to the UNO.
 This is optional. If you want to trigger light effects in the dome via slipring, connect A4 SLC to SLC on the slipring board and A5 SDA on the Arduino to SDA on the slipring board.
 
 Arduino UNO R3 has separate I2C pins which is really nice but the Circuits@Home USB Shield covers them up. The R3 Board still has I2C pins at A4 and A5.
+
+I've had better performance using the Mega with I2C because of using the hardware serial pins.
 
 
 ### Controller Pairing
