@@ -31,6 +31,9 @@ A lot of the instructions here are relevant to the original [Padawan PS2](http:/
 	[Assembled USB Shield](https://www.circuitsathome.com/products-page/arduino-shields/usb-host-shield-2-0-for-arduino-assembled) $30
 
 	[Unassebled USB Shield](https://www.circuitsathome.com/products-page/arduino-shields/usb-host-shield-2-0-for-arduino) $25
+	
+	If Amazon is your thing Sainsmart has a USB Host Shield that has been found to be compatible with Padawan360 (Prime elligble!)
+	[SainSmart USB Shield](http://www.amazon.com/SainSmart-Compatible-HOST-Shield-Arduino/dp/B006J4G000/ref=sr_1_1?ie=UTF8&qid=1420994477&sr=8-1&keywords=usb+host+shield+2.0+for+arduino)
 
 - ### Xbox 360 Wireless USB Receiver
 	You can probably source this from Best Buy or something local but it's available on [NewEgg here](http://www.newegg.com/Product/Product.aspx?Item=0NS-000Z-00003)
