@@ -33,7 +33,7 @@ A lot of the instructions here are relevant to the original [Padawan PS2](http:/
 	[Unassebled USB Shield](https://www.circuitsathome.com/products-page/arduino-shields/usb-host-shield-2-0-for-arduino) $25
 	
 	If Amazon is your thing Sainsmart has a USB Host Shield that has been found to be compatible with Padawan360 (Prime elligble!)
-	[SainSmart USB Shield](http://www.amazon.com/SainSmart-Compatible-HOST-Shield-Arduino/dp/B006J4G000/ref=sr_1_1?ie=UTF8&qid=1420994477&sr=8-1&keywords=usb+host+shield+2.0+for+arduino)
+	[SainSmart USB Shield](http://www.amazon.com/SainSmart-Compatible-HOST-Shield-Arduino/dp/B006J4G000/ref=sr_1_1?ie=UTF8&qid=1420994477&sr=8-1&keywords=usb+host+shield+2.0+for+arduino). *NOTE* I've seen that some SainSmart isn't sending them with the 2x3 header pin that connects the two boards together to program it over serial (ISCP pins). Real dumb. Spent a while a DroidCon trying to help someone it before realizing that was missing and it's absolutely necessary. You can grab 2x3 headers from Sparkfun for 50 cents. The missing headers seem to be a common issue as the Aamazon reviews are rife with that complaint.
 
 - ### Xbox 360 Wireless USB Receiver
 	You can probably source this from Best Buy or something local but it's available on [NewEgg here](http://www.newegg.com/Product/Product.aspx?Item=0NS-000Z-00003)
@@ -71,6 +71,7 @@ Sketches provided are for I2C holoprojector boards. The front uses the one with 
 
 Solder the headers on the USB Shield if you purchased the unassembled version. Fit the shield over the Arduino UNO by lining up the pins and pushing in. It should fit snugly. Plug the Xbox 360 Wireless Receiver USB cable into the USB port. That was easy.
 
+If you're using the Mega, orient the USB ports to line up over each other.
 
 ### Sound
 
