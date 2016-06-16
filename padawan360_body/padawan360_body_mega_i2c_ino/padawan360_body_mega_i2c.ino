@@ -93,7 +93,7 @@ const int DOMEBAUDRATE = 2400;
 
 /////////////////////////////////////////////////////////////////
 Sabertooth Sabertooth2x(128, Serial1);
-Sabertooth SyR(128, Serial2);
+Sabertooth Syren10(128, Serial2);
 
 // Satisfy IDE, which only needs to see the include statment in the ino.
 #ifdef dobogusinclude
