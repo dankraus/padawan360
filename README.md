@@ -26,11 +26,7 @@ A lot of the instructions here are relevant to the original [Padawan PS2](http:/
 	I run a Mega for the body. It uses the hardware serial pins to connect to the motor controllers. Better performance and memory utilization. The Mega has more memory available too so there's more room to expand and do more if you want. With the Mega, I can also support I2C a bit better.
 
 - ### USB Shield
-	Sourced from [Circuits@Home](http://www.circuitsathome.com). It comes in two variants, one without shield headers soldered, and one without them soldered. Difference in $5.
-
-	[Assembled USB Shield](https://www.circuitsathome.com/products-page/arduino-shields/usb-host-shield-2-0-for-arduino-assembled) $30
-
-	[Unassebled USB Shield](https://www.circuitsathome.com/products-page/arduino-shields/usb-host-shield-2-0-for-arduino) $25
+	Sourced from [Circuits@Home](https://www.circuitsathome.com/products-page/arduino-shields). They've shuffled their links around. Find it on that link labeled "USB Host Shield 2.0 for Arduino – Assembled". They used to offer it assembled and unassembled but as of this writing, they just have it assembled.
 	
 	If Amazon is your thing Sainsmart has a USB Host Shield that has been found to be compatible with Padawan360 (Prime elligble!)
 	[SainSmart USB Shield](http://www.amazon.com/SainSmart-Compatible-HOST-Shield-Arduino/dp/B006J4G000/ref=sr_1_1?ie=UTF8&qid=1420994477&sr=8-1&keywords=usb+host+shield+2.0+for+arduino). *NOTE* I've seen that some SainSmart isn't sending them with the 2x3 header pin that connects the two boards together to program it over serial (ISCP pins). Real dumb. Spent a while a DroidCon trying to help someone it before realizing that was missing and it's absolutely necessary. You can grab 2x3 headers from Sparkfun for 50 cents. The missing headers seem to be a common issue as the Aamazon reviews are rife with that complaint.
