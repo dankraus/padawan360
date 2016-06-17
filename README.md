@@ -22,8 +22,8 @@ A lot of the instructions here are relevant to the original [Padawan PS2](http:/
 - ### Arduino Uno (Option 1)
 	For the body. Main Arduino that runs everything. Receivers, code, connection to MP3 trigger, etc runs through here. SparkFun, RadioShack, Amazon, you can find these everywhere these days.
 
-- ### Arduino Mega (Option 2)
-	I run a Mega for the body. It uses the hardware serial pins. Better performance and memory utilization. With the Mega, I can also support I2C a bit better.
+- ### Arduino Mega (Option 2 and Recommended!)
+	I run a Mega for the body. It uses the hardware serial pins to connect to the motor controllers. Better performance and memory utilization. The Mega has more memory available too so there's more room to expand and do more if you want. With the Mega, I can also support I2C a bit better.
 
 - ### USB Shield
 	Sourced from [Circuits@Home](http://www.circuitsathome.com). It comes in two variants, one without shield headers soldered, and one without them soldered. Difference in $5.
