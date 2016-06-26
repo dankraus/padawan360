@@ -1,7 +1,16 @@
 // =======================================================================================
-// /////////////////////////Padawan360 Body Code v1.0 ////////////////////////////////////
+// /////////////////////////Padawan360 Body Code v1.1 ////////////////////////////////////
 // =======================================================================================
 /*
+v1.1
+by Robert Corvus
+- fixed inverse throttle on right turn
+-   where right turn goes full throttle on slight right and slow when all the way right
+- fixed left-shifted deadzone for turning
+- fixed left turn going in opposite direction
+- fixed default baud rate for new syren10
+- clarified variable names
+v1.0
 by Dan Kraus
 dskraus@gmail.com
 Astromech: danomite4047
@@ -74,7 +83,7 @@ const byte DRIVEDEADZONERANGE = 20;
 // for packetized options are: 2400, 9600, 19200 and 38400. I think you need to pick one that works
 // and I think it varies across different firmware versions.
 // for simple serial use 9600
-const int DOMEBAUDRATE = 2400;
+const int DOMEBAUDRATE = 9600;
 
 // Comment the SYRENSIMPLE out for packetized serial connection to Syren - Recomended.
 // I've never tested Syrene Simple, it's a carry-over from DanF's library.
@@ -93,15 +102,15 @@ const int DOMEBAUDRATE = 2400;
 
 #include <SoftwareSerial.h>
 // These are the pins for the Sabertooth and Syren
-SoftwareSerial STSerial(NOT_A_PIN, 4);
-SoftwareSerial SyRSerial(2, 5);
+SoftwareSerial Sabertooth2xSerial(NOT_A_PIN, 4);
+SoftwareSerial Syren10Serial(2, 5);
 
 /////////////////////////////////////////////////////////////////
-Sabertooth ST(128, STSerial);
+Sabertooth Sabertooth2x(128, Sabertooth2xSerial);
 #if defined(SYRENSIMPLE)
-SyRenSimplified SyR(SyRSerial); // Use SWSerial as the serial port.
+SyRenSimplified Syren10(Syren10Serial); // Use SWSerial as the serial port.
 #else
-Sabertooth SyR(128, SyRSerial);
+Sabertooth Syren10(128, Syren10Serial);
 #endif
 
 // Satisfy IDE, which only needs to see the include statment in the ino.
@@ -125,7 +134,7 @@ int turnDirection = 20;
 // Action number used to randomly choose a sound effect or a dome turn
 byte automateAction = 0;
 char driveThrottle = 0;
-char sticknum = 0;
+char rightStickValue = 0;
 char domeThrottle = 0;
 char turnThrottle = 0;
 
@@ -152,17 +161,17 @@ USB Usb;
 XBOXRECV Xbox(&Usb);
 
 void setup(){
-  SyRSerial.begin(DOMEBAUDRATE);
+  Syren10Serial.begin(DOMEBAUDRATE);
   #if defined(SYRENSIMPLE)
-    SyR.motor(0);
+    Syren10.motor(0);
   #else
-    SyR.autobaud();
+    Syren10.autobaud();
   #endif
 
   // 9600 is the default baud rate for Sabertooth packet serial.
-  STSerial.begin(9600);
+  Sabertooth2xSerial.begin(9600);
   // Send the autobaud command to the Sabertooth controller(s).
-  ST.autobaud();
+  //Sabertooth2x.autobaud();
   /* NOTE: *Not all* Sabertooth controllers need this command.
   It doesn't hurt anything, but V2 controllers use an
   EEPROM setting (changeable with the function setBaudRate) to set
@@ -171,20 +180,20 @@ void setup(){
   the autobaud line and save yourself two seconds of startup delay.
   */
 
-  ST.setTimeout(950);
+  Sabertooth2x.setTimeout(950);
   #if !defined(SYRENSIMPLE)
-    SyR.setTimeout(950);
+    Syren10.setTimeout(950);
   #endif
 
   #if !defined(SYRENSIMPLE)
-  SyR.setTimeout(950);
+  Syren10.setTimeout(950);
   #endif
 
   // The Sabertooth won't act on mixed mode packet serial commands until
   // it has received power levels for BOTH throttle and turning, since it
   // mixes the two together to get diff-drive power levels for both motors.
-  ST.drive(0);
-  ST.turn(0);
+  Sabertooth2x.drive(0);
+  Sabertooth2x.turn(0);
 
   pinMode(EXTINGUISHERPIN, OUTPUT);
   digitalWrite(EXTINGUISHERPIN, HIGH);
@@ -213,9 +222,9 @@ void loop(){
   // set all movement to 0 so if we lose connection we don't have a runaway droid!
   // a restraining bolt and jawa droid caller won't save us here!
   if(!Xbox.XboxReceiverConnected || !Xbox.Xbox360Connected[0]){
-    ST.drive(0);
-    ST.turn(0);
-    SyR.motor(1,0);
+    Sabertooth2x.drive(0);
+    Sabertooth2x.turn(0);
+    Syren10.motor(1,0);
     firstLoadOnConnect = false;
     return;
   }
@@ -272,17 +281,17 @@ void loop(){
       }
       if(automateAction < 4){
         #if defined(SYRENSIMPLE)
-          SyR.motor(turnDirection);
+          Syren10.motor(turnDirection);
         #else
-          SyR.motor(1,turnDirection);
+          Syren10.motor(1,turnDirection);
         #endif
 
         delay(750);
 
         #if defined(SYRENSIMPLE)
-          SyR.motor(0);
+          Syren10.motor(0);
         #else
-          SyR.motor(1,0);
+          Syren10.motor(1,0);
         #endif
 
         if(turnDirection > 0){
@@ -293,7 +302,7 @@ void loop(){
       }
 
       // sets the mix, max seconds between automation actions - sounds and dome movement
-      automateDelay = random(5,20);
+      automateDelay = random(3,10);
     }
   }
 
@@ -464,7 +473,7 @@ void loop(){
   }
 
 
-  // Change drivespeed if drive is eabled
+  // Change drivespeed if drive is enabled
   // Press Right Analog Stick (R3)
   // Set LEDs for speed - 1 LED, Low. 2 LED - Med. 3 LED High
   if(Xbox.getButtonClick(R3, 0) && isDriveEnabled) {
@@ -496,34 +505,27 @@ void loop(){
   // Xbox 360 analog stick values are signed 16 bit integer value
   // Sabertooth runs at 8 bit signed. -127 to 127 for speed (full speed reverse and  full speed forward)
   // Map the 360 stick values to our min/max current drive speed
-  sticknum = (map(Xbox.getAnalogHat(RightHatY, 0), -32768, 32767, -drivespeed, drivespeed));
-  if(sticknum > -DRIVEDEADZONERANGE && sticknum < DRIVEDEADZONERANGE){
+  rightStickValue = (map(Xbox.getAnalogHat(RightHatY, 0), -32768, 32767, -drivespeed, drivespeed));
+  if(rightStickValue > -DRIVEDEADZONERANGE && rightStickValue < DRIVEDEADZONERANGE){
     // stick is in dead zone - don't drive
     driveThrottle = 0;
   } else {
-    if(driveThrottle < sticknum){
-      if(sticknum - driveThrottle < (RAMPING+1) ){
+    if(driveThrottle < rightStickValue){
+      if(rightStickValue - driveThrottle < (RAMPING+1) ){
         driveThrottle+=RAMPING;
       } else {
-        driveThrottle = sticknum;
+        driveThrottle = rightStickValue;
       }
-    } else if(driveThrottle > sticknum){
-      if(driveThrottle - sticknum < (RAMPING+1) ){
+    } else if(driveThrottle > rightStickValue){
+      if(driveThrottle - rightStickValue < (RAMPING+1) ){
         driveThrottle-=RAMPING;
       } else {
-        driveThrottle = sticknum;
+        driveThrottle = rightStickValue;
       }
     }
   }
 
-  turnThrottle = map(Xbox.getAnalogHat(RightHatX, 0), -32768, 32767, 0, 255);
-  if(turnThrottle <= 200 && turnThrottle >= 54)
-    turnThrottle = map(turnThrottle, 54, 200, -(TURNSPEED/3), (TURNSPEED/3));
-  else if(turnThrottle > 200)
-    turnThrottle = map(turnThrottle, 201, 255, TURNSPEED/3, TURNSPEED);
-  else if(turnThrottle < 54)
-    turnThrottle = map(turnThrottle, 0, 53, -TURNSPEED, -(TURNSPEED/3));
-
+  turnThrottle = map(Xbox.getAnalogHat(RightHatX, 0), -32768, 32767, -TURNSPEED, TURNSPEED);
 
 
   // DRIVE!
@@ -535,8 +537,8 @@ void loop(){
       // stick is in dead zone - don't turn
       turnThrottle = 0;
     }
-    ST.turn(-turnThrottle);
-    ST.drive(driveThrottle);
+    Sabertooth2x.turn(turnThrottle);
+    Sabertooth2x.drive(driveThrottle);
   }
 
   // DOME DRIVE!
@@ -546,12 +548,10 @@ void loop(){
     domeThrottle = 0;
   }
 
-  //domeThrottle = 0;
-
   #if defined(SYRENSIMPLE)
-    SyR.motor(domeThrottle);
+    Syren10.motor(domeThrottle);
   #else
-    SyR.motor(1,domeThrottle);
+    Syren10.motor(1,domeThrottle);
   #endif
 } // END loop()
 
