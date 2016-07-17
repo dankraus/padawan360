@@ -1,5 +1,5 @@
 // =======================================================================================
-// /////////////////////////Padawan360 Body Code v1.0 ////////////////////////////////////
+// /////////////////////////Padawan360 Body Code v1.0 - UNO ////////////////////////////////////
 // =======================================================================================
 /*
 by Dan Kraus
@@ -16,7 +16,7 @@ so I wanted to be able to have something with parts that other builder's could e
 down and buy parts even at your local big box store.
 
 Hardware:
-Arduino UNO
+***Arduino UNO***
 USB Host Shield from circuits@home
 Microsoft Xbox 360 Controller
 Xbox 360 USB Wireless Reciver
@@ -24,10 +24,10 @@ Sabertooth Motor Controller
 Syren Motor Controller
 Sparkfun MP3 Trigger
 
-This sketch supports I2C and calls events on many sound effect actions to control lights and sounds.
-It is NOT set up for Dan's method of using the serial packet to transfer data up to the dome
+This sketch supports DOES NOT SUPPORT I2C
+It is NOT YET set up for Dan's method of using the serial packet to transfer data up to the dome
 to trigger some light effects. If you want that, you'll need to reference DanF's original
-Padawan code.
+Padawan code or update it yourself and ask me to merge your updates into this one :)
 
 Set Sabertooth 2x25/2x12 Dip Switches 1 and 2 Down, All Others Up
 For SyRen Simple Serial Set Switches 1 and 2 Down, All Others Up
@@ -66,7 +66,7 @@ const byte RAMPING = 5;
 // direct method calls against the Syren/Sabertooth library itself but it's not supported in all
 // serial modes so just manage and check it in software here
 // use the lowest number with no drift
-// DOMEDEADZONERANGE for the left stick, DRIVEDEADZONERANGE for the left stick
+// DOMEDEADZONERANGE for the left stick, DRIVEDEADZONERANGE for the right stick
 const byte DOMEDEADZONERANGE = 20;
 const byte DRIVEDEADZONERANGE = 20;
 
@@ -88,7 +88,6 @@ const int DOMEBAUDRATE = 2400;
 #include <SyRenSimplified.h>
 #include <Servo.h>
 #include <MP3Trigger.h>
-#include <Wire.h>
 #include <XBOXRECV.h>
 
 #include <SoftwareSerial.h>
@@ -134,7 +133,6 @@ boolean firstLoadOnConnect = false;
 // this is legacy right now. The rest of the sketch isn't set to send any of this
 // data to another arduino like the original Padawan sketch does
 // right now just using it to track whether or not the HP light is on so we can
-// fire the correct I2C event to turn on/off the HP light.
 //struct SEND_DATA_STRUCTURE{
 //  //put your variable definitions here for the data you want to send
 //  //THIS MUST BE EXACTLY THE SAME ON THE OTHER ARDUINO
@@ -176,10 +174,6 @@ void setup(){
     SyR.setTimeout(950);
   #endif
 
-  #if !defined(SYRENSIMPLE)
-  SyR.setTimeout(950);
-  #endif
-
   // The Sabertooth won't act on mixed mode packet serial commands until
   // it has received power levels for BOTH throttle and turning, since it
   // mixes the two together to get diff-drive power levels for both motors.
@@ -192,9 +186,6 @@ void setup(){
   mp3Trigger.setup();
   mp3Trigger.setVolume(vol);
 
-
-  // Start I2C Bus. The body is the master.
-  Wire.begin();
 
    //Serial.begin(115200);
   // Wait for serial port to connect - used on Leonardo, Teensy and other boards with built-in USB CDC serial connection
@@ -320,16 +311,16 @@ void loop(){
 
   // Logic display brightness.
   // Hold L1 and press up/down on dpad to increase/decrease brightness
+  /*
   if(Xbox.getButtonClick(UP, 0)){
     if(Xbox.getButtonPress(L1, 0)){
-      triggerI2C(10, 24);
     }
   }
   if(Xbox.getButtonClick(DOWN, 0)){
     if(Xbox.getButtonPress(L1, 0)){
-      triggerI2C(10, 25);
     }
   }
+  */
 
 
   //FIRE EXTINGUISHER
@@ -352,20 +343,12 @@ void loop(){
   if(Xbox.getButtonClick(Y, 0)){
     if(Xbox.getButtonPress(L1, 0)){
       mp3Trigger.play(8);
-      //logic lights, random
-      triggerI2C(10, 0);
     } else if(Xbox.getButtonPress(L2, 0)){
       mp3Trigger.play(2);
-      //logic lights, random
-      triggerI2C(10, 0);
     } else if(Xbox.getButtonPress(R1, 0)){
       mp3Trigger.play(9);
-      //logic lights, random
-      triggerI2C(10, 0);
     } else {
       mp3Trigger.play(random(13,17));
-      //logic lights, random
-      triggerI2C(10, 0);
     }
   }
 
@@ -373,28 +356,12 @@ void loop(){
   if(Xbox.getButtonClick(A, 0)){
     if(Xbox.getButtonPress(L1, 0)){
       mp3Trigger.play(6);
-      //logic lights
-      triggerI2C(10, 6);
-      // HPEvent 11 - SystemFailure - I2C
-      triggerI2C(25, 11);
-      triggerI2C(26, 11);
-      triggerI2C(27, 11);
     } else if(Xbox.getButtonPress(L2, 0)){
       mp3Trigger.play(1);
-      //logic lights, alarm
-      triggerI2C(10, 1);
-      //  HPEvent 3 - alarm - I2C
-      triggerI2C(25, 3);
-      triggerI2C(26, 3);
-      triggerI2C(27, 3);
     } else if(Xbox.getButtonPress(R1, 0)){
       mp3Trigger.play(11);
-      //logic lights, alarm2Display
-      triggerI2C(10, 11);
     } else {
       mp3Trigger.play(random(17,25));
-      //logic lights, random
-      triggerI2C(10, 0);
     }
   }
 
@@ -402,24 +369,12 @@ void loop(){
   if(Xbox.getButtonClick(B, 0)){
     if(Xbox.getButtonPress(L1, 0)){
       mp3Trigger.play(7);
-      //logic lights, random
-      triggerI2C(10, 0);
     } else if(Xbox.getButtonPress(L2, 0)){
       mp3Trigger.play(3);
-      //logic lights, random
-      triggerI2C(10, 0);
     } else if(Xbox.getButtonPress(R1, 0)){
       mp3Trigger.play(10);
-      //logic lights, random
-      triggerI2C(10, 0);
-      // HPEvent 1 - Disco - I2C
-      triggerI2C(25, 10);
-      triggerI2C(26, 10);
-      triggerI2C(27, 10);
     } else {
       mp3Trigger.play(random(32,52));
-      //logic lights, random
-      triggerI2C(10, 0);
     }
   }
 
@@ -428,40 +383,28 @@ void loop(){
     // leia message L1+X
     if(Xbox.getButtonPress(L1, 0)){
       mp3Trigger.play(5);
-      //logic lights, leia message
-      triggerI2C(10, 5);
-      // Front HPEvent 1 - HoloMessage - I2C -leia message
-      triggerI2C(25, 9);
     } else if(Xbox.getButtonPress(L2, 0)){
       mp3Trigger.play(4);
-      //logic lights
-      triggerI2C(10, 4);
     } else if(Xbox.getButtonPress(R1, 0)){
       mp3Trigger.play(12);
-      //logic lights, random
-      triggerI2C(10, 0);
     } else {
       mp3Trigger.play(random(25,32));
-      //logic lights, random
-      triggerI2C(10, 0);
     }
   }
 
   // turn hp light on & off with Left Analog Stick Press (L3)
+  /*
   if(Xbox.getButtonClick(L3, 0))  {
     // if hp light is on, turn it off
     if(isHPOn){
       isHPOn = false;
       // turn hp light off
-      // Front HPEvent 2 - ledOFF - I2C
-      triggerI2C(25, 2);
     } else {
       isHPOn = true;
       // turn hp light on
-      // Front HPEvent 4 - whiteOn - I2C
-      triggerI2C(25, 1);
     }
   }
+  */
 
 
   // Change drivespeed if drive is eabled
@@ -474,20 +417,17 @@ void loop(){
       drivespeed = DRIVESPEED2;
       Xbox.setLedOn(LED2, 0);
       mp3Trigger.play(53);
-      triggerI2C(10, 22);
     } else if(drivespeed == DRIVESPEED2 && (DRIVESPEED3!=0)){
       //change to high speed and play sound scream
       drivespeed = DRIVESPEED3;
       Xbox.setLedOn(LED3, 0);
       mp3Trigger.play(1);
-      triggerI2C(10, 23);
     } else {
       //we must be in high speed
       //change to low speed and play sound 2-tone
       drivespeed = DRIVESPEED1;
       Xbox.setLedOn(LED1, 0);
       mp3Trigger.play(52);
-      triggerI2C(10, 21);
     }
   }
 
@@ -554,9 +494,3 @@ void loop(){
     SyR.motor(1,domeThrottle);
   #endif
 } // END loop()
-
-void triggerI2C(byte deviceID, byte eventID){
-  //Wire.beginTransmission(deviceID);
-  //Wire.write(eventID);
-  //Wire.endTransmission();
-}
