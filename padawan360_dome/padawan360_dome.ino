@@ -1,6 +1,8 @@
 // =======================================================================================
-// /////////////////////////Padawan360 Dome Code v1.0///////////////////////////////////////
+// ///////////////////////// Padawan360 Dome Code v1.6 ///////////////////////////////////////
 // =======================================================================================
+//                                Robert Corvus
+//                        Revised  Date: 08/04/2015
 //                                 Dan K
 //                        Revised  Date: 08/02/2014
 //   Designed to be used with a second Arduino running the Padawan Body code
@@ -1571,257 +1573,257 @@ void setText(byte disp, char* message)
 
 ///////////////////////////////
 // Latin Alphabet, put in PROGMEM so save RAM
-int cA[] PROGMEM = { 
+const int cA[] PROGMEM = { 
   B00000110,
   B00001001,
   B00001111,
   B00001001,
   B00001001 };
 
-int cB[] PROGMEM = { 
+const int cB[] PROGMEM = { 
   B00000111,
   B00001001,
   B00000111,
   B00001001,
   B00000111 };
 
-int cC[] PROGMEM = { 
+const int cC[] PROGMEM = { 
   B00000110,
   B00001001,
   B00000001,
   B00001001,
   B00000110 };
 
-int cD[] PROGMEM = { 
+const int cD[] PROGMEM = { 
   B0000111,
   B0001001,
   B0001001,
   B0001001,
   B0000111 };
 
-int cE[] PROGMEM = { 
+const int cE[] PROGMEM = { 
   B00001111,
   B00000001,
   B00000111,
   B00000001,
   B00001111 };
 
-int cF[] PROGMEM = { 
+const int cF[] PROGMEM = { 
   B00001111,
   B00000001,
   B00000111,
   B00000001,
   B00000001 };
 
-int cG[] PROGMEM = { 
+const int cG[] PROGMEM = { 
   B00001110,
   B00000001,
   B00001101,
   B00001001,
   B00000110 };
 
-int cH[] PROGMEM = { 
+const int cH[] PROGMEM = { 
   B00001001,
   B00001001,
   B00001111,
   B00001001,
   B00001001 };
 
-int cI[] PROGMEM = { 
+const int cI[] PROGMEM = { 
   B00000111,
   B00000010,
   B00000010,
   B00000010,
   B00000111 };
 
-int cJ[] PROGMEM = { 
+const int cJ[] PROGMEM = { 
   B00001000,
   B00001000,
   B00001000,
   B00001001,
   B00000110 };
 
-int cK[] PROGMEM = { 
+const int cK[] PROGMEM = { 
   B00001001,
   B00000101,
   B00000011,
   B00000101,
   B00001001 };
 
-int cL[] PROGMEM = { 
+const int cL[] PROGMEM = { 
   B00000001,
   B00000001,
   B00000001,
   B00000001,
   B00001111 };
 
-int cM[] PROGMEM = { 
+const int cM[] PROGMEM = { 
   B00010001,
   B00011011,
   B00010101,
   B00010001,
   B00010001 };
 
-int cN[] PROGMEM = { 
+const int cN[] PROGMEM = { 
   B00001001,
   B00001011,
   B00001101,
   B00001001,
   B00001001 };
 
-int cO[] PROGMEM = { 
+const int cO[] PROGMEM = { 
   B00000110,
   B00001001,
   B00001001,
   B00001001,
   B00000110 };
 
-int cP[] PROGMEM = { 
+const int cP[] PROGMEM = { 
   B00000111,
   B00001001,
   B00000111,
   B00000001,
   B00000001 };
 
-int cQ[] PROGMEM = { 
+const int cQ[] PROGMEM = { 
   B00000110,
   B00001001,
   B00001101,
   B00001001,
   B00010110 };
 
-int cR[] PROGMEM = { 
+const int cR[] PROGMEM = { 
   B00000111,
   B00001001,
   B00000111,
   B00000101,
   B00001001 };
 
-int cS[] PROGMEM = { 
+const int cS[] PROGMEM = { 
   B00001110,
   B00000001,
   B00000110,
   B00001000,
   B00000111 };
-int cT[] PROGMEM = { 
+const int cT[] PROGMEM = { 
   B00001111,
   B00000110,
   B00000110,
   B00000110,
   B00000110 };
-int cU[] PROGMEM = { 
+const int cU[] PROGMEM = { 
   B00001001,
   B00001001,
   B00001001,
   B00001001,
   B00000110 };
-int cV[] PROGMEM = { 
+const int cV[] PROGMEM = { 
   B00001001,
   B00001001,
   B00001001,
   B00000110,
   B00000110 };
-int cW[] PROGMEM = { 
+const int cW[] PROGMEM = { 
   B00010001,
   B00010001,
   B00010101,
   B00011011,
   B00010001 };
-int cX[] PROGMEM = { 
+const int cX[] PROGMEM = { 
   B00001001,
   B00001001,
   B00000110,
   B00001001,
   B00001001 };
-int cY[] PROGMEM = { 
+const int cY[] PROGMEM = { 
   B00001001,
   B00001001,
   B00000110,
   B00000110,
   B00000110 };
-int cZ[] PROGMEM = { 
+const int cZ[] PROGMEM = { 
   B00001111,
   B00000100,
   B00000010,
   B00000001,
   B00001111 };
-int c0[] PROGMEM = { 
+const int c0[] PROGMEM = { 
   B00000110,
   B00001101,
   B00001011,
   B00001011,
   B00000110 };
 //Non-letters
-int c1[] PROGMEM = { 
+const int c1[] PROGMEM = { 
   B00000110,
   B00000101,
   B00000100,
   B00000100,
   B00011111 };
-int c2[] PROGMEM = { 
+const int c2[] PROGMEM = { 
   B00001110,
   B00010001,
   B00000100,
   B00000010,
   B00011111 };  
-int c3[] PROGMEM = { 
+const int c3[] PROGMEM = { 
   B00011111,
   B00010000,
   B00011110,
   B00010000,
   B00011111 };  
-int c4[] PROGMEM = { 
+const int c4[] PROGMEM = { 
   B00001100,
   B00010100,
   B00000100,
   B00000100,
   B00011111 };  
-int c5[] PROGMEM = { 
+const int c5[] PROGMEM = { 
   B00001100,
   B00010100,
   B00000100,
   B00000100,
   B00011111 };  
-int c6[] PROGMEM = { 
+const int c6[] PROGMEM = { 
   B00001100,
   B00010100,
   B00000100,
   B00000100,
   B00011111 };  
-int c7[] PROGMEM = { 
+const int c7[] PROGMEM = { 
   B00001100,
   B00010100,
   B00000100,
   B00000100,
   B00011111 };  
-int c8[] PROGMEM = { 
+const int c8[] PROGMEM = { 
   B00001100,
   B00010100,
   B00000100,
   B00000100,
   B00011111 };      
-int c9[] PROGMEM = { 
+const int c9[] PROGMEM = { 
   B00001100,
   B00010100,
   B00000100,
   B00000100,
   B00011111 };  
 // Heart Symbol    
-int ch[] PROGMEM = { 
+const int ch[] PROGMEM = { 
   B00001010,
   B00010101,
   B00010001,
   B00001010,
   B00000100 };
 // Tie Fighter Symbol    
-int ct[] PROGMEM = { 
+const int ct[] PROGMEM = { 
   B00100010,
   B00101010,
   B00110110,
   B00101010,
   B00100010 }; 
 // R2D2 Symbol    
-int cr[] PROGMEM = { 
+const int cr[] PROGMEM = { 
   B00001110,
   B00011011,
   B00011111,
@@ -1829,14 +1831,14 @@ int cr[] PROGMEM = {
   B00010001 } 
 ; 
 // dash - Symbol    
-int cd[] PROGMEM = { 
+const int cd[] PROGMEM = { 
   B00000000,
   B00000000,
   B00001110,
   B00000000,
   B00000000 };
 // Film Bar Symbol for use with Leia message
-int cf[] PROGMEM = { 
+const int cf[] PROGMEM = { 
   B00000100,
   B00000100,
   B00000100,
@@ -1844,7 +1846,7 @@ int cf[] PROGMEM = {
   B00000100 };
 
 //Blank Symbol
-int cb[] PROGMEM = { 
+const int cb[] PROGMEM = { 
   B00000000,
   B00000000,
   B00000000,
@@ -1852,7 +1854,7 @@ int cb[] PROGMEM = {
   B00000000 };  
 
 //upSymbol
-int cu[] PROGMEM = { 
+const int cu[] PROGMEM = { 
   B00000001,
   B00000010,
   B00000100,
@@ -1860,7 +1862,7 @@ int cu[] PROGMEM = {
   B00010000 }; 
 
 //down Symbol
-int cn[] PROGMEM = { 
+const int cn[] PROGMEM = { 
   B00010000,
   B00001000,
   B00000100,
@@ -1868,7 +1870,7 @@ int cn[] PROGMEM = {
   B00000001 }; 
 
 //Dot Symbol
-int cdot[] PROGMEM = { 
+const int cdot[] PROGMEM = { 
   B00000000,
   B00000000,
   B00000000,
@@ -1880,7 +1882,7 @@ int cdot[] PROGMEM = {
 void getLatinLetter(int* letterbitmap, char let)
 {
   // pLetter will be a pointer to program memory
-  int* pLetter;
+  const int* pLetter;
 
   // get pointer to program memory from character
   switch (let)
