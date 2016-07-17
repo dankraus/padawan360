@@ -211,6 +211,12 @@ void loop() {
     mp3Trigger.play(21);
     Xbox.setLedMode(ROTATING, 0);
   }
+  
+  if (Xbox.getButtonClick(XBOX, 0)) {
+    if(Xbox.getButtonPress(L1, 0) && Xbox.getButtonPress(R1, 0)){ 
+      Xbox.disconnect(0);
+    }
+  }
 
   // enable / disable right stick (droid movement) & play a sound to signal motor state
   if (Xbox.getButtonClick(START, 0)) {
