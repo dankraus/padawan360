@@ -105,8 +105,7 @@ Connect the pins for the Syren Motor Controller
 
 |Syren10   |Arduino Mega   |
 |---|---|
-| S1  |Serial2 (Rx2)  |
-| S2  |Serial2 (Tx2)   |
+| S1  |Serial2 (Tx1)  |
 | 0v  |GND   |
 
 |Syren10   |Battery   |
@@ -157,8 +156,8 @@ A: You need to just adjust the deadzone `const byte DOMEDEADZONERANGE = 20;` Inc
 
 |Sabertooth (2x25 or 2x12)   |Arduino Mega   |
 |---|---|
-| S1  |Serial1 (Rx1)  |
-| S2  |Serial1 (Tx1)   |
+| S1  |Serial1 (Tx1)  |
+| S2  |Serial1 (Rx1)   |
 | 0v  |GND   |
 
 |Sabertooth (2x25 or 2x12)   |Battery   |
