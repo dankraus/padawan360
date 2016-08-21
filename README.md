@@ -29,7 +29,7 @@ A lot of the instructions here are relevant to the original [Padawan PS2](http:/
 	Sourced from [Circuits@Home](https://www.circuitsathome.com/products-page/arduino-shields). They've shuffled their links around. Find it on that link labeled "USB Host Shield 2.0 for Arduino – Assembled". They used to offer it assembled and unassembled but as of this writing, they just have it assembled.
 
 	If Amazon is your thing Sainsmart has a USB Host Shield that has been found to be compatible with Padawan360 (Prime elligble!)
-	[SainSmart USB Shield](http://www.amazon.com/SainSmart-Compatible-HOST-Shield-Arduino/dp/B006J4G000/ref=sr_1_1?ie=UTF8&qid=1420994477&sr=8-1&keywords=usb+host+shield+2.0+for+arduino). *NOTE* I've seen that some SainSmart isn't sending them with the 2x3 header pin that connects the two boards together to program it over serial (ISCP pins). Real dumb. Spent a while a DroidCon trying to help someone it before realizing that was missing and it's absolutely necessary. You can grab 2x3 headers from Sparkfun for 50 cents. The missing headers seem to be a common issue as the Aamazon reviews are rife with that complaint.
+	[SainSmart USB Shield](http://www.amazon.com/SainSmart-Compatible-HOST-Shield-Arduino/dp/B006J4G000/ref=sr_1_1?ie=UTF8&qid=1420994477&sr=8-1&keywords=usb+host+shield+2.0+for+arduino). *NOTE* I've seen that some SainSmart isn't sending them with the 2x3 headers that connects the shield to the Arduino board together. This connection is absolutely necessary for the Arduino to talk to the shield over serial (ISCP pins). It will NOT work without this connection. Real dumb. The shield is basically useless without the connection. I spent a while a DroidCon trying to help someone it before realizing that was missing and it's absolutely necessary. You can grab 2x3 headers from Sparkfun for 50 cents. The missing headers seem to be a common issue as the Aamazon reviews are rife with that complaint.
 
 - ### Xbox 360 Wireless USB Receiver
 	You can probably source this from Best Buy or something local but it's available on [NewEgg here](http://www.newegg.com/Product/Product.aspx?Item=0NS-000Z-00003)
@@ -191,8 +191,8 @@ Q: The right analog stick is centered but it still drives(turns, drives forward,
 A: You need to just adjust the deadzone `const byte DRIVEDEADZONERANGE = 20;` Increase this number until you can let the stick go neutral and nothing moves. The code has some more info on that above that line.
 
 
-### Arduino UNO
-Upload the padawan360_body sketch to the UNO.
+### Arduino UNO/MEGA
+Install the libraries from the Libraries folder. Upload the padawan360_body sketch to the UNO/MEGA.
 
 
 ####I2C
@@ -210,7 +210,7 @@ There's also the [Xbox Support Guide](http://support.xbox.com/en-US/xbox-on-othe
 
 ### Teeces Logics
 
-Upload the padawan360_dome sketch on the Teeces arduino. Connect I2C on the dome end of slipring board. SDA to A4 and SLC to A5.
+If you didn't install the libraries in preparation of the body sketch, install the libraries found in the library folder. Upload the padawan360_dome sketch on the Teeces arduino. Connect I2C on the dome end of slipring board. SDA to A4 and SLC to A5.
 
 ### HoloProjectors I2C
 
