@@ -462,15 +462,7 @@ void loop(){
     }
   }
 
-  turnThrottle = map(Xbox.getAnalogHat(RightHatX, 0), -32768, 32767, 0, 255);
-  if(turnThrottle <= 200 && turnThrottle >= 54)
-    turnThrottle = map(turnThrottle, 54, 200, -(TURNSPEED/3), (TURNSPEED/3));
-  else if(turnThrottle > 200)
-    turnThrottle = map(turnThrottle, 201, 255, TURNSPEED/3, TURNSPEED);
-  else if(turnThrottle < 54)
-    turnThrottle = map(turnThrottle, 0, 53, -TURNSPEED, -(TURNSPEED/3));
-
-
+turnThrottle = map(Xbox.getAnalogHat(RightHatX, 0), -32768, 32767, -TURNSPEED, TURNSPEED);
 
   // DRIVE!
   // right stick (drive)
