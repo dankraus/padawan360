@@ -105,7 +105,7 @@ Connect the pins for the Syren Motor Controller
 
 |Syren10   |Arduino Mega   |
 |---|---|
-| S1  |Serial2 (Tx1)  |
+| S1  |Serial2 (Tx2)  |
 | 0v  |GND   |
 
 |Syren10   |Battery   |
