@@ -242,3 +242,6 @@ L1 + R1 + Center Xbox Guide button - Turns off and disconnects controller
 ## Coming Soon
 
 Dome servos via I2C support.
+
+## Licensing
+This software is made available for use by R2 Builders Club members. This software is made available for use at no charge but may not be sold or distributed in any form. Don't be a jerk. Copyright 2014 Dan Kraus.
