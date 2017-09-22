@@ -56,9 +56,9 @@ A lot of the instructions here are relevant to the original [Padawan PS2](http:/
 	The sketch provided here will work for version 3. Use the regular setup and installation instructions but include pinouts for pins A4 and A5 if you want I2C control.
 
 - #### Optional
-##### RSeries RGB HPs.
-Sketches provided are for I2C holoprojector boards. The front uses the one with the servo pinouts although the sketch doesn't servo control of the HPs. The top and rear HP are just the regular I2C controlled boards.
-##### Slipring
+  - ##### RSeries RGB HPs.
+  Sketches provided are for I2C holoprojector boards. The front uses the one with the servo pinouts although the sketch doesn't servo control of the HPs. The top and rear HP are just the regular I2C controlled boards.
+  - ##### Slipring
   Used to pass power up from the body to the dome and also signal for I2C to control dome lights.
 
 ## Setup
