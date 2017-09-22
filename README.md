@@ -208,6 +208,17 @@ Power the Arduino up. It will also power up the Receiver.  Press the big button 
 
 There's also the [Xbox Support Guide](http://support.xbox.com/en-US/xbox-on-other-devices/connections/xbox-360-wireless-gaming-receiver-windows).
 
+#### Troubleshooting
+Not triggering sound or getting any movement? Make sure you're paired. The best way is to use the Xbox Wireless library's example sketch.
+
+1. File>Examples>USB Host Shield>Xbox>Xbox Recv
+2. Upload that to your Arduino
+3. Look at the code and you'll see `Serial.begin`. Take note of that number.
+4. Tools>Serial Monitor. Set the baud rate to that number from step 3. 
+5. Pair your controller. 
+
+Press buttons, do you see the button names output? If you don't, you're not paired. If it's paired, you'll see the button names in the serial monitor as you press them. 
+
 ### Teeces Logics
 
 If you didn't install the libraries in preparation of the body sketch, install the libraries found in the library folder. Upload the padawan360_dome sketch on the Teeces arduino. Connect I2C on the dome end of slipring board. SDA to A4 and SLC to A5.
