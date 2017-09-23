@@ -138,14 +138,14 @@ In some cases, we've noticed that the dome may behave eratically after starting 
 
 Make sure that you use at least a 14 Guage wire between the motor and the Syren 10. Anything hire can cause problems (fire!)
 
-#### Dome FAQs
-Q: My Dome just randomly spins!
+#### Dome Troubleshooting
+**"My Dome just randomly spins!"**
 
-A: Depending on the firmware on the Syren, sometimes you need to change the serial baud rate it communicates at. Change this like `const int DOMEBAUDRATE = 2400;` For packetized options are: 2400, 9600, 19200 and 38400
+Depending on the firmware on the Syren, sometimes you need to change the serial baud rate it communicates at. Change this like `const int DOMEBAUDRATE = 2400;` For packetized options are: 2400, 9600, 19200 and 38400
 
-Q: The left analog stick is centered but the dome still spins!
+**"The left analog stick is centered but the dome still spins!"**
 
-A: You need to just adjust the deadzone `const byte DOMEDEADZONERANGE = 20;` Increase this number until you can let the stick go neutral and nothing moves. The code has some more info on that above that line.
+You need to just adjust the deadzone `const byte DOMEDEADZONERANGE = 20;` Increase this number until you can let the stick go neutral and nothing moves. The code has some more info on that above that line.
 
 
 ### Foot Drive
