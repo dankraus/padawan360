@@ -63,6 +63,12 @@ A lot of the instructions here are relevant to the original [Padawan PS2](http:/
 
 ## Setup
 
+### Arduino IDE
+
+Be sure you have the latest version of the Arduino IDE installed available [here at the Arduino website](https://www.arduino.cc/en/Main/Software).
+
+Installing libraries and using the Arduino IDE is beyond the scope of this documentation. Refer to the Arduino website's documentation for how to install libraries and upload software to your Arduino.
+
 ### USB Shield
 
 Solder the headers on the USB Shield if you purchased the unassembled version. Fit the shield over the Arduino UNO by lining up the pins and pushing in. It should fit snugly. Plug the Xbox 360 Wireless Receiver USB cable into the USB port. That was easy.
