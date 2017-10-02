@@ -33,12 +33,12 @@ A lot of the instructions here are relevant to the original [Padawan PS2](http:/
 
 - ### Xbox 360 Wireless USB Receiver
 	You can probably source this from Best Buy or something local but it's available on [NewEgg here](http://www.newegg.com/Product/Product.aspx?Item=0NS-000Z-00003)
-	I bought a generic one from Microcenter that works fine.
+	I bought a generic one from Microcenter that works fine. Some users have gotten cheap ones from Ebay from off-brands that did not function. I highly recommend buying 1st party official Microsoft receiver. Your mileage may vary with off-brand components here.
 
 - ### Xbox 360 Wireless Controller
-	[Controller via Amazon](http://www.amazon.com/Xbox-360-Wireless-Controller-Glossy-Black/dp/B003ZSP0WW).  I have a nice blue one to match R2 personally ;)
+	[Controller via Amazon](http://www.amazon.com/Xbox-360-Wireless-Controller-Glossy-Black/dp/B003ZSP0WW).  I have a nice blue one to match R2 personally ;) Like the USB Receiver, I highly recommend buying a 1st party official Microsoft controller. I know one user bought one cheap on Ebay and it didn't even have a sync button and there was no X on the center Home button. Your mileage may vary with off-brand components here.
 
-	**Note:** I have seen the controller bundled with the USB receiver together. It was in the gaming peripheals department in my local Microcenter. It's marketed for PC gaming. It's the same stuff though. Nice to get it in one package if you can if you don't have an extra 360 controller to spare.
+	**Note:** I have seen the controller bundled with the USB receiver together. It was in the gaming peripheals department in my local Microcenter. It's marketed for PC gaming. Nice to get it in one package if you can if you don't have an extra 360 controller to spare.
 
 - ### MP3 Trigger
 	[Sourced from SparkFun](https://www.sparkfun.com/products/11029). Be sure to get a microSD card too. Nothing too big, it's just MP3s.
