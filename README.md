@@ -202,7 +202,7 @@ A: You need to just adjust the deadzone `const byte DRIVEDEADZONERANGE = 20;` In
 
 
 ### Arduino UNO/MEGA
-Install the libraries from the Libraries folder. Upload the padawan360_body sketch to the UNO/MEGA.
+Install the libraries from the Libraries folder. Upload the corresponding padawan360_body sketch from the `padawan360_body` folder for your Arduino (UNO or Mega) sketch to the Arduino. There is one for the UNO and one for the Mega.
 
 
 ####I2C
