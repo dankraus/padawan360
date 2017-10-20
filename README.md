@@ -147,7 +147,7 @@ In some cases, we've noticed that the dome may behave eratically after starting 
 Make sure that you use at least a 14 Guage wire between the motor and the Syren 10. Anything hire can cause problems (fire!)
 
 #### Dome Troubleshooting
-**"My Dome just randomly spins!"**
+**"My Dome just randomly spins!"** **My Dome won't spin!** **My Dome doesn't spin right** etc etc..
 
 Depending on the firmware on the Syren, sometimes you need to change the serial baud rate it communicates at. Change this like `const int DOMEBAUDRATE = 2400;` For packetized options are: 2400, 9600, 19200 and 38400
 
@@ -205,7 +205,7 @@ A: You need to just adjust the deadzone `const byte DRIVEDEADZONERANGE = 20;` In
 Install the libraries from the Libraries folder. Upload the corresponding padawan360_body sketch from the `padawan360_body` folder for your Arduino (UNO or Mega) sketch to the Arduino. There is one for the UNO and one for the Mega.
 
 
-####I2C
+#### I2C
 This is optional. If you want to trigger light effects in the dome via slipring, connect A4 SLC to SLC on the slipring board and A5 SDA on the Arduino to SDA on the slipring board.
 
 Arduino UNO R3 has separate I2C pins which is really nice but the Circuits@Home USB Shield covers them up. The R3 Board still has I2C pins at A4 and A5.
