@@ -252,13 +252,11 @@ Mike Erwin put out some great boards with Arduino bootloaders on them. Programma
 
 
 ### Button Guide
-Controller guide coming soon. For now, refer to Padawan PS2 controller guide. It's the same button layout, just with a 360 controller.
-
 Press guide button to turn on the controller.
 
 Press Start button to engage motors!
 
-L1 + R1 + Center Xbox Guide button - Turns off and disconnects controller
+![Image of Yaktocat](https://github.com/dankraus/padawan360/blob/master/xbox360-controller-guide.jpg)
 
 ## Coming Soon
 
