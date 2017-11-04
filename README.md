@@ -256,7 +256,9 @@ Press guide button to turn on the controller.
 
 Press Start button to engage motors!
 
-![Image of Yaktocat](https://github.com/dankraus/padawan360/blob/master/xbox360-controller-guide.jpg)
+![Button Guide](https://github.com/dankraus/padawan360/blob/master/xbox360-controller-guide.jpg)
+
+(Button layout image courtesy of LarryJ on Astromech. Thanks!)
 
 ## Coming Soon
 
