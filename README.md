@@ -53,13 +53,14 @@ A lot of the instructions here are relevant to the original [Padawan PS2](http:/
 	Up to you and how big and loud you want. I have a small speaker and a $20 amp from Pyle. A ground loop isolator might be necessary to protect the MP3 trigger and eliminate buzzing from the speaker.
 
 - ### Teeces lights
-	The sketch provided here will work for version 3. Use the regular setup and installation instructions but include pinouts for pins A4 and A5 if you want I2C control.
+	The sketch provided here will work for version 3 of the Teeces lighting system for Logic Lights. Use the regular setup and installation instructions for the Teeces system. To control brightness and changing the lighting animations that match some scenes from the films (like the flicker pattern during the Leia Message), the Arduino for the Teeces system needs to be connected to the body Arduino via I2C. Connect the I2C pins from the Body Arduino to the Teeces Arduino. SDA->SDA pins and SCL->SCL pins. On the Uno these are A4 and A5 respectively and on the Mega they are 20 and 21. Verify the I2C pins on your Teeces Arduino. These can be connected via a slipring.
 
 - #### Optional
   - ##### RSeries RGB HPs.
   Sketches provided are for I2C holoprojector boards. The front uses the one with the servo pinouts although the sketch doesn't servo control of the HPs. The top and rear HP are just the regular I2C controlled boards.
+  
   - ##### Slipring
-  Used to pass power up from the body to the dome and also signal for I2C to control dome lights.
+  Used to pass power up from the body to the dome and also signal for I2C to control dome lights. The slipring allows wires to go from body to dome and allow the dome to spin 360 degrees without tangling the wires.
 
 ## Setup
 
