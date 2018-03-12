@@ -1,7 +1,7 @@
 Padawan360
 ====
 
-Still to come, controller layout and diagram, servo control.
+Still to come - servo control.
 
 
 ## Intro
