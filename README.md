@@ -44,7 +44,7 @@ A lot of the instructions here are relevant to the original [Padawan PS2](http:/
 	[Sourced from SparkFun](https://www.sparkfun.com/products/11029). Be sure to get a microSD card too. Nothing too big, it's just MP3s.
 
 - ### Sabertooth Motor Controller - Feet
-	Depending on your motors you'll want a [Sabertooth 2x25](https://www.dimensionengineering.com/products/sabertooth2x25) or [2x12](https://www.dimensionengineering.com/products/sabertooth2x12). My styrene droid with Jaycar motors uses 2x12. Most people tend to use 2x25 for scooter motors and NPC motors. Consult with Dimension Engineering to make sure you get the right one you need.	 Either one will work with the code
+	Depending on your motors you'll want a  [Sabertooth 2x32](https://www.dimensionengineering.com/products/sabertooth2x32), [Sabertooth 2x25](https://www.dimensionengineering.com/products/sabertooth2x25) or [2x12](https://www.dimensionengineering.com/products/sabertooth2x12). The 2x32 and the 2x24 seem to be crossing over price point. Might as well get the 2x32 if you're buying brand new. There's some additional bells and whistles in the 32 and can be programmed via Dimension Engineering's software, but some of those usefuls features are handled in the code, like for speed Ramping for example. My styrene droid with Jaycar motors uses 2x12. Most people tend to use 2x25 or 2x32 for scooter motors and NPC motors. Consult with Dimension Engineering to make sure you get the right one you need. Either one will work with the code
 
 - ### Syren Motor Controller - Dome
 	[Syren 10](https://www.dimensionengineering.com/products/syren10)
@@ -159,24 +159,24 @@ You need to just adjust the deadzone `const byte DOMEDEADZONERANGE = 20;` Increa
 
 ### Foot Drive
 
-|Sabertooth (2x25 or 2x12)   |Arduino UNO   |
+|Sabertooth ((2x32 2x25 or 2x12)   |Arduino UNO   |
 |---|---|
 | S1  |4   |
 | S2  |3   |
 | 0v  |GND   |
 
-|Sabertooth (2x25 or 2x12)   |Arduino Mega   |
+|Sabertooth ((2x32 2x25 or 2x12)   |Arduino Mega   |
 |---|---|
 | S1  |Serial1 (Tx1)  |
 | S2  |Serial1 (Rx1)   |
 | 0v  |GND   |
 
-|Sabertooth (2x25 or 2x12)   |Battery   |
+|Sabertooth (2x32 2x25 or 2x12)   |Battery   |
 |---|---|
 | B+  |Positve   |
 | B-  |Negative   |
 
-|Sabertooth (2x25 or 2x12)   |Foot Motors   |
+|Sabertooth ((2x32 2x25 or 2x12)   |Foot Motors   |
 |---|---|
 | M1A	  |Right Motor Terminal 1   |
 | M1B	  |Right Motor Terminal 2   |
@@ -188,8 +188,9 @@ People often seem to get stuck here once they power everything up and find that 
 
 Please use a maximum of 12 Gauge for the wires going to the Sabertooth and motors/power.
 
+Sabertooth 2x32 / 2x25 / 2x12 dip switches should 1 & 2 OFF and all others ON if using a regular SLA battery
 
-Sabertooth 2x25 / 2x12 dip switches should 1 & 2 OFF and all others ON if using a regular SLA battery
+If you're using the 2x32 and you've tinkered with Dimension Engineering's DEScribe Software to tweak settings on your motor controller, under the Serial and USB tab, make sure the Baud Rate is set to 9600. This should be the default, but you should verify.
 
 If you're using 5v to power some components on your I2C device chain, you can use the 5V terminal on the Sabertooth and connect to the positive I2C pin header on the slipring board and 0V on the Sabertooth to GND on the slipring board.
 
