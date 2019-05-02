@@ -4,6 +4,46 @@ Padawan360
 Still to come - servo control.
 
 
+- [Padawan360](#padawan360)
+  * [Intro](#intro)
+  * [Components](#components)
+    + [Arduino Uno (Option 1)](#arduino-uno--option-1-)
+    + [Arduino Mega (Option 2 and Recommended!)](#arduino-mega--option-2-and-recommended--)
+    + [USB Shield](#usb-shield)
+    + [Xbox 360 Wireless USB Receiver](#xbox-360-wireless-usb-receiver)
+    + [Xbox 360 Wireless Controller](#xbox-360-wireless-controller)
+    + [MP3 Trigger](#mp3-trigger)
+    + [Sabertooth Motor Controller - Feet](#sabertooth-motor-controller---feet)
+    + [Syren Motor Controller - Dome](#syren-motor-controller---dome)
+    + [Amp and Speakers](#amp-and-speakers)
+    + [Teeces lights](#teeces-lights)
+      - [Optional](#optional)
+        * [RSeries RGB HPs.](#rseries-rgb-hps)
+        * [Slipring](#slipring)
+  * [Setup](#setup)
+    + [Arduino IDE](#arduino-ide)
+    + [USB Shield](#usb-shield-1)
+    + [Sound](#sound)
+      - [Troubleshooting](#troubleshooting)
+    + [Dome](#dome)
+      - [Option 1](#option-1)
+      - [Option 2 (Best Option)](#option-2--best-option-)
+      - [Dome Troubleshooting](#dome-troubleshooting)
+    + [Foot Drive](#foot-drive)
+      - [Drive FAQs](#drive-faqs)
+    + [Arduino UNO/MEGA](#arduino-uno-mega)
+      - [I2C](#i2c)
+    + [Controller Pairing](#controller-pairing)
+      - [Troubleshooting](#troubleshooting-1)
+    + [Teeces Logics](#teeces-logics)
+    + [HoloProjectors I2C](#holoprojectors-i2c)
+  * [Controls](#controls)
+    + [Controller LED Status](#controller-led-status)
+    + [Button Guide](#button-guide)
+  * [Coming Soon](#coming-soon)
+  * [Licensing](#licensing)
+
+
 ## Intro
 This is a control system for 1:1 scale remote control R2-D2 powered by Arduinos and controlled with an Xbox 360 Controller. It triggers lights, sounds, and controls foot drive and dome drive motors. It also supports I2C to trigger events in the dome lights or can be extended to interact with anything else that supports I2C
 
