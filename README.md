@@ -319,7 +319,7 @@ If the wrong sounds are playing for button presses, they are likely added to the
 
 ### Dome
 
-_**"My Dome just randomly spins!" My Dome won't spin! My Dome doesn't spin correctly** etc etc.._
+_**My Dome just randomly spins! My Dome won't spin! My Dome doesn't spin correctly** etc etc.._
 
 Depending on the firmware on the Syren, sometimes you need to change the serial baud rate it communicates at. Change this like `const int DOMEBAUDRATE = 2400;` For packetized options are: 2400, 9600, 19200 and 38400
 
@@ -327,14 +327,13 @@ _**The dome spins in the wrong direction when I move the dome control stick!**_
 
 Flip the leads to the dome motor. There is no positive and negative. Orient your controls from the perspective of the droid. Stand behind the droid so that pressing left on the stick makes the dome spin left and right on the stick makes the some spin right.
 
-_**"The left analog stick is centered but the dome still spins!"**_
+_**The left analog stick is centered but the dome still spins!**_
 
 You need to just adjust the deadzone `const byte DOMEDEADZONERANGE = 20;` Increase this number until you can let the stick go neutral and nothing moves. The code has some more info on that above that line.
 
 ### Drives
 
-_When I press left on the drive stick, it turns to the right (or vice versa)!_
-_When I push forward on the drive stick it drives backwards (or vice versa)!_
+_**When I press left on the drive stick, it turns to the right (or vice versa)! When I push forward on the drive stick it drives backwards (or vice versa)!**_
 
 People often regularly run into this once they power everything up and find that they push forward on the stick and it drives to left, stick to the left drives drives backwards, etc. Don't fret, motors can be wired positive/negative. It doesn't matter. Start flipping the motor connections to the Sabertooth. First flip M1A and M1B. If that doesn't fix it, flip it back and try the other. If it still isn't right, then try flipping both sets. R2 is driven like a tank. Spin the right motor forward to go left, left motor forward to go right. Both motors forward, drive forward. Keep that in mind as you troubleshoot.
 
