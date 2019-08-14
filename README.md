@@ -289,7 +289,7 @@ Press Start button to engage motors!
 
 Drive stick is now on the LEFT STICK and dome control is on the RIGHT STICK.
 They have been reversed from what is seen in the below controller guide.
-Set `leftHandDrive` in the code to false to drive with the RIGHT STICK as seen in the guide.
+Set `isLeftStickDrive` in the code to false to drive with the RIGHT STICK as seen in the guide.
 
 ![Button Guide](https://github.com/dankraus/padawan360/blob/master/xbox360-controller-guide.jpg)
 
@@ -325,7 +325,8 @@ Depending on the firmware on the Syren, sometimes you need to change the serial 
 
 _**The dome spins in the wrong direction when I move the dome control stick!**_
 
-Flip the leads to the dome motor. There is no positive and negative. Orient your controls from the perspective of the droid. Stand behind the droid so that pressing left on the stick makes the dome spin left and right on the stick makes the some spin right.
+Flip the leads to the dome motor. There is no positive and negative. Orient your controls from the perspective of the droid. Stand behind the droid so that pressing 
+on the stick makes the dome spin left and right on the stick makes the some spin right.
 
 _**The left analog stick is centered but the dome still spins!**_
 
