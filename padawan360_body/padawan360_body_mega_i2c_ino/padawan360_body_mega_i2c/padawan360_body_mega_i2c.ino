@@ -51,9 +51,9 @@ const byte DRIVESPEED3 = 127;
 // Default drive speed at startup
 byte drivespeed = DRIVESPEED1;
 
-// Set leftHandDrive to true for driving  with the left stick
-// Set leftHandDrive to false for driving with the right stick (legacy and original configuration)
-boolean leftHandDrive = true; 
+// Set isLeftStickDrive to true for driving  with the left stick
+// Set isLeftStickDrive to false for driving with the right stick (legacy and original configuration)
+boolean isLeftStickDrive = true; 
 
 // the higher this number the faster the droid will spin in place, lower - easier to control.
 // Recommend beginner: 40 to 50, experienced: 50 $ up, I like 70
@@ -199,7 +199,7 @@ void setup() {
   mp3Trigger.setup();
   mp3Trigger.setVolume(vol);
 
-  if(leftHandDrive) {
+  if(isLeftStickDrive) {
     throttleAxis = LeftHatY;
     turnAxis = LeftHatX;
     domeAxis = RightHatX;
