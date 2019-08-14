@@ -16,6 +16,9 @@ support for PS3 and Xbox 360 controllers. Bluetooth dongles were inconsistent as
 so I wanted to be able to have something with parts that other builder's could easily track
 down and buy parts even at your local big box store.
 
+v2.0 Changes:
+- Makes left analog stick default drive control stick. Configurable between left or right stick via isLeftStickDrive 
+
 Hardware:
 ***Arduino Mega 2560***
 USB Host Shield from circuits@home
@@ -51,14 +54,14 @@ const byte DRIVESPEED3 = 127;
 // Default drive speed at startup
 byte drivespeed = DRIVESPEED1;
 
-// Set isLeftStickDrive to true for driving  with the left stick
-// Set isLeftStickDrive to false for driving with the right stick (legacy and original configuration)
-boolean isLeftStickDrive = true; 
-
 // the higher this number the faster the droid will spin in place, lower - easier to control.
 // Recommend beginner: 40 to 50, experienced: 50 $ up, I like 70
 // This may vary based on your drive system and power system
 const byte TURNSPEED = 70;
+
+// Set isLeftStickDrive to true for driving  with the left stick
+// Set isLeftStickDrive to false for driving with the right stick (legacy and original configuration)
+boolean isLeftStickDrive = true; 
 
 // If using a speed controller for the dome, sets the top speed. You'll want to vary it potenitally
 // depending on your motor. My Pittman is really fast so I dial this down a ways from top speed.
@@ -142,6 +145,8 @@ boolean firstLoadOnConnect = false;
 AnalogHatEnum throttleAxis;
 AnalogHatEnum turnAxis;
 AnalogHatEnum domeAxis;
+ButtonEnum speedSelectButton;
+ButtonEnum hpLightToggleButton;
 
 
 // this is legacy right now. The rest of the sketch isn't set to send any of this
@@ -203,10 +208,15 @@ void setup() {
     throttleAxis = LeftHatY;
     turnAxis = LeftHatX;
     domeAxis = RightHatX;
+    speedSelectButton = L3;
+    hpLightToggleButton = R3;
+
   } else {
     throttleAxis = RightHatY;
     turnAxis = RightHatX;
     domeAxis = LeftHatX;
+    speedSelectButton = R3;
+    hpLightToggleButton = L3;
   }
 
 
@@ -470,8 +480,9 @@ void loop() {
     }
   }
 
-  // turn hp light on & off with Left Analog Stick Press (L3)
-  if (Xbox.getButtonClick(L3, 0))  {
+  // turn hp light on & off with Right Analog Stick Press (R3) for left stick drive mode
+  // turn hp light on & off with Left Analog Stick Press (L3) for right stick drive mode
+  if (Xbox.getButtonClick(hpLightToggleButton, 0))  {
     // if hp light is on, turn it off
     if (isHPOn) {
       isHPOn = false;
@@ -487,10 +498,11 @@ void loop() {
   }
 
 
-  // Change drivespeed if drive is eabled
-  // Press Right Analog Stick (R3)
+  // Change drivespeed if drive is enabled
+  // Press Left Analog Stick (L3) for left stick drive mode
+  // Press Right Analog Stick (R3) for right stick drive mode
   // Set LEDs for speed - 1 LED, Low. 2 LED - Med. 3 LED High
-  if (Xbox.getButtonClick(R3, 0) && isDriveEnabled) {
+  if (Xbox.getButtonClick(speedSelectButton, 0) && isDriveEnabled) {
     //if in lowest speed
     if (drivespeed == DRIVESPEED1) {
       //change to medium speed and play sound 3-tone
