@@ -5,8 +5,8 @@ Still to come - servo control.
 - [Padawan360](#padawan360)
 - [Intro](#intro)
 - [Components](#components)
-  - [Arduino Uno (Option 1)](#arduino-uno--option-1-)
-  - [Arduino Mega (Option 2 and Recommended!)](#arduino-mega--option-2-and-recommended--)
+  - [Arduino Mega (Option 1 and Recommended!)](#arduino-mega--option-1-and-recommended--)
+  - [Arduino Uno (Option 2)](#arduino-uno--option-2-)
   - [USB Shield](#usb-shield)
   - [Xbox 360 Wireless USB Receiver](#xbox-360-wireless-usb-receiver)
   - [Xbox 360 Wireless Controller](#xbox-360-wireless-controller)
@@ -61,13 +61,15 @@ It is strongly recommended that you read this guide completely a few times befor
 
 ## Components
 
-- ### Arduino Uno (Option 1)
+- ### Arduino Mega (Option 1 and Recommended!)
 
-      For the body. Main Arduino that runs everything. Receivers, code, connection to MP3 trigger, etc runs through here. SparkFun, RadioShack, Amazon, you can find these everywhere these days.
+I run a Mega for the body. It uses the hardware serial pins to connect to the motor controllers. Better performance and memory utilization. The Mega has more memory available too so there's more room to expand and do more if you want. With the Mega, I can also support I2C a bit better. I tend to make tweaks to improve readability here more than the Uno as I run a Mega in my droid. It's more performant than the Uno.
 
-- ### Arduino Mega (Option 2 and Recommended!)
+- ### Arduino Uno (Option 2)
 
-      I run a Mega for the body. It uses the hardware serial pins to connect to the motor controllers. Better performance and memory utilization. The Mega has more memory available too so there's more room to expand and do more if you want. With the Mega, I can also support I2C a bit better.
+For the body. Main Arduino that runs everything. Receivers, code, connection to MP3 trigger, etc runs through here. SparkFun, RadioShack, Amazon, you can find these everywhere these days.
+
+
 
 - ### USB Shield
 
