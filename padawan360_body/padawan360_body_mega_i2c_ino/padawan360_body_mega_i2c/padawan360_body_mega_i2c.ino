@@ -220,7 +220,7 @@ void setup() {
   }
 
 
-  // Start I2C Bus. The body is the master.
+ // Start I2C Bus. The body is the master.
   Wire.begin();
 
   //Serial.begin(115200);
@@ -532,7 +532,6 @@ void loop() {
   // Xbox 360 analog stick values are signed 16 bit integer value
   // Sabertooth runs at 8 bit signed. -127 to 127 for speed (full speed reverse and  full speed forward)
   // Map the 360 stick values to our min/max current drive speed
-  
   throttleStickValue = (map(Xbox.getAnalogHat(throttleAxis, 0), -32768, 32767, -drivespeed, drivespeed));
   if (throttleStickValue > -DRIVEDEADZONERANGE && throttleStickValue < DRIVEDEADZONERANGE) {
     // stick is in dead zone - don't drive
@@ -553,7 +552,7 @@ void loop() {
     }
   }
 
-  turnThrottle = map(Xbox.getAnalogHat(RightHatX, 0), -32768, 32767, -TURNSPEED, TURNSPEED);
+  turnThrottle = map(Xbox.getAnalogHat(turnAxis, 0), -32768, 32767, -TURNSPEED, TURNSPEED);
 
   // DRIVE!
   // right stick (drive)
@@ -569,7 +568,7 @@ void loop() {
   }
 
   // DOME DRIVE!
-  domeThrottle = (map(Xbox.getAnalogHat(LeftHatX, 0), -32768, 32767, DOMESPEED, -DOMESPEED));
+  domeThrottle = (map(Xbox.getAnalogHat(domeAxis, 0), -32768, 32767, DOMESPEED, -DOMESPEED));
   if (domeThrottle > -DOMEDEADZONERANGE && domeThrottle < DOMEDEADZONERANGE) {
     //stick in dead zone - don't spin dome
     domeThrottle = 0;
