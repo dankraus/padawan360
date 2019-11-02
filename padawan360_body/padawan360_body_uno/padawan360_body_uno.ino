@@ -1,5 +1,5 @@
 // =======================================================================================
-// /////////////////////////Padawan360 Body Code v1.0 - UNO ////////////////////////////////////
+// /////////////////////////Padawan360 Body Code v2.0 - UNO ////////////////////////////////////
 // =======================================================================================
 /*
 by Dan Kraus
@@ -14,6 +14,9 @@ some existing libraries out there to leverage and came across the USB Host Shiel
 support for PS3 and Xbox 360 controllers. Bluetooth dongles were inconsistent as well
 so I wanted to be able to have something with parts that other builder's could easily track
 down and buy parts even at your local big box store.
+
+v2.0 Changes:
+- Makes left analog stick default drive control stick. Configurable between left or right stick via isLeftStickDrive 
 
 Hardware:
 ***Arduino UNO***
@@ -50,6 +53,11 @@ byte drivespeed = DRIVESPEED1;
 // the higher this number the faster the droid will spin in place, lower - easier to control.
 // Recommend beginner: 40 to 50, experienced: 50 $ up, I like 70
 const byte TURNSPEED = 70;
+
+// Set isLeftStickDrive to true for driving  with the left stick
+// Set isLeftStickDrive to false for driving with the right stick (legacy and original configuration)
+boolean isLeftStickDrive = true; 
+
 // If using a speed controller for the dome, sets the top speed. You'll want to vary it potenitally
 // depending on your motor. My Pittman is really fast so I dial this down a ways from top speed.
 // Use a number up to 127 for serial
@@ -123,12 +131,19 @@ byte automateDelay = random(5,20);// set this to min and max seconds between sou
 int turnDirection = 20;
 // Action number used to randomly choose a sound effect or a dome turn
 byte automateAction = 0;
-char driveThrottle = 0;
-char sticknum = 0;
-char domeThrottle = 0;
-char turnThrottle = 0;
+
+int driveThrottle = 0;
+int throttleStickValue = 0;
+int domeThrottle = 0;
+int turnThrottle = 0;
 
 boolean firstLoadOnConnect = false;
+
+AnalogHatEnum throttleAxis;
+AnalogHatEnum turnAxis;
+AnalogHatEnum domeAxis;
+ButtonEnum speedSelectButton;
+ButtonEnum hpLightToggleButton;
 
 // this is legacy right now. The rest of the sketch isn't set to send any of this
 // data to another arduino like the original Padawan sketch does
@@ -185,6 +200,21 @@ void setup(){
 
   mp3Trigger.setup();
   mp3Trigger.setVolume(vol);
+
+  if(isLeftStickDrive) {
+    throttleAxis = LeftHatY;
+    turnAxis = LeftHatX;
+    domeAxis = RightHatX;
+    speedSelectButton = L3;
+    hpLightToggleButton = R3;
+
+  } else {
+    throttleAxis = RightHatY;
+    turnAxis = RightHatX;
+    domeAxis = LeftHatX;
+    speedSelectButton = R3;
+    hpLightToggleButton = L3;
+  }
 
 
    //Serial.begin(115200);
@@ -398,9 +428,10 @@ void loop(){
     }
   }
 
-  // turn hp light on & off with Left Analog Stick Press (L3)
+  // turn hp light on & off with Right Analog Stick Press (R3) for left stick drive mode
+  // turn hp light on & off with Left Analog Stick Press (L3) for right stick drive mode
   /*
-  if(Xbox.getButtonClick(L3, 0))  {
+  if(Xbox.getButtonClick(hpLightToggleButton, 0))  {
     // if hp light is on, turn it off
     if(isHPOn){
       isHPOn = false;
@@ -414,9 +445,10 @@ void loop(){
 
 
   // Change drivespeed if drive is eabled
-  // Press Right Analog Stick (R3)
+  // Press Left Analog Stick (L3) for left stick drive mode
+  // Press Right Analog Stick (R3) for right stick drive mode
   // Set LEDs for speed - 1 LED, Low. 2 LED - Med. 3 LED High
-  if(Xbox.getButtonClick(R3, 0) && isDriveEnabled) {
+  if(Xbox.getButtonClick(speedSelectButton, 0) && isDriveEnabled) {
     //if in lowest speed
     if(drivespeed == DRIVESPEED1){
       //change to medium speed and play sound 3-tone
@@ -442,34 +474,34 @@ void loop(){
   // Xbox 360 analog stick values are signed 16 bit integer value
   // Sabertooth runs at 8 bit signed. -127 to 127 for speed (full speed reverse and  full speed forward)
   // Map the 360 stick values to our min/max current drive speed
-  sticknum = (map(Xbox.getAnalogHat(RightHatY, 0), -32768, 32767, -drivespeed, drivespeed));
-  if(sticknum > -DRIVEDEADZONERANGE && sticknum < DRIVEDEADZONERANGE){
+  throttleStickValue = (map(Xbox.getAnalogHat(throttleAxis, 0), -32768, 32767, -drivespeed, drivespeed));
+  if (throttleStickValue > -DRIVEDEADZONERANGE && throttleStickValue < DRIVEDEADZONERANGE) {
     // stick is in dead zone - don't drive
     driveThrottle = 0;
   } else {
-    if(driveThrottle < sticknum){
-      if(sticknum - driveThrottle < (RAMPING+1) ){
-        driveThrottle+=RAMPING;
+    if (driveThrottle < throttleStickValue) {
+      if (throttleStickValue - driveThrottle < (RAMPING + 1) ) {
+        driveThrottle += RAMPING;
       } else {
-        driveThrottle = sticknum;
+        driveThrottle = throttleStickValue;
       }
-    } else if(driveThrottle > sticknum){
-      if(driveThrottle - sticknum < (RAMPING+1) ){
-        driveThrottle-=RAMPING;
+    } else if (driveThrottle > throttleStickValue) {
+      if (driveThrottle - throttleStickValue < (RAMPING + 1) ) {
+        driveThrottle -= RAMPING;
       } else {
-        driveThrottle = sticknum;
+        driveThrottle = throttleStickValue;
       }
     }
   }
 
-turnThrottle = map(Xbox.getAnalogHat(RightHatX, 0), -32768, 32767, -TURNSPEED, TURNSPEED);
+  turnThrottle = map(Xbox.getAnalogHat(turnAxis, 0), -32768, 32767, -TURNSPEED, TURNSPEED);
 
   // DRIVE!
   // right stick (drive)
-  if (isDriveEnabled){
+  if (isDriveEnabled) {
     // Only do deadzone check for turning here. Our Drive throttle speed has some math applied
     // for RAMPING and stuff, so just keep it separate here
-    if(turnThrottle > -DRIVEDEADZONERANGE && turnThrottle < DRIVEDEADZONERANGE){
+    if (turnThrottle > -DRIVEDEADZONERANGE && turnThrottle < DRIVEDEADZONERANGE) {
       // stick is in dead zone - don't turn
       turnThrottle = 0;
     }
@@ -478,13 +510,11 @@ turnThrottle = map(Xbox.getAnalogHat(RightHatX, 0), -32768, 32767, -TURNSPEED, T
   }
 
   // DOME DRIVE!
-  domeThrottle = (map(Xbox.getAnalogHat(LeftHatX, 0), -32768, 32767, -DOMESPEED, DOMESPEED));
-  if (domeThrottle > -DOMEDEADZONERANGE && domeThrottle < DOMEDEADZONERANGE){
+  domeThrottle = (map(Xbox.getAnalogHat(domeAxis, 0), -32768, 32767, DOMESPEED, -DOMESPEED));
+  if (domeThrottle > -DOMEDEADZONERANGE && domeThrottle < DOMEDEADZONERANGE) {
     //stick in dead zone - don't spin dome
     domeThrottle = 0;
   }
-
-  //domeThrottle = 0;
 
   #if defined(SYRENSIMPLE)
     SyR.motor(domeThrottle);
