@@ -1,10 +1,11 @@
 // =======================================================================================
-// /////////////////////////Padawan360 Body Code - Mega I2C v1.0 ////////////////////////////////////
+// /////////////////////////Padawan360 Body Code - Mega I2C v2.0 ////////////////////////////////////
 // =======================================================================================
 /*
 by Dan Kraus
 dskraus@gmail.com
 Astromech: danomite4047
+Project Site: https://github.com/dankraus/padawan360/
 
 Heavily influenced by DanF's Padwan code which was built for Arduino+Wireless PS2
 controller leveraging Bill Porter's PS2X Library. I was running into frequent disconnect
@@ -14,6 +15,9 @@ some existing libraries out there to leverage and came across the USB Host Shiel
 support for PS3 and Xbox 360 controllers. Bluetooth dongles were inconsistent as well
 so I wanted to be able to have something with parts that other builder's could easily track
 down and buy parts even at your local big box store.
+
+v2.0 Changes:
+- Makes left analog stick default drive control stick. Configurable between left or right stick via isLeftStickDrive 
 
 Hardware:
 ***Arduino Mega 2560***
@@ -35,20 +39,30 @@ Placed a 10K ohm resistor between S1 & GND on the SyRen 10 itself
 
 */
 
-//************************** Set speed and turn speeds here************************************//
+// ************************** Options, Configurations, and Settings ***********************************
 
+
+// SPEED AND TURN SPEEDS
 //set these 3 to whatever speeds work for you. 0-stop, 127-full speed.
 const byte DRIVESPEED1 = 50;
-//Recommend beginner: 50 to 75, experienced: 100 to 127, I like 100.
+// Recommend beginner: 50 to 75, experienced: 100 to 127, I like 100. 
+// These may vary based on your drive system and power system
 const byte DRIVESPEED2 = 100;
 //Set to 0 if you only want 2 speeds.
 const byte DRIVESPEED3 = 127;
 
+// Default drive speed at startup
 byte drivespeed = DRIVESPEED1;
 
 // the higher this number the faster the droid will spin in place, lower - easier to control.
 // Recommend beginner: 40 to 50, experienced: 50 $ up, I like 70
+// This may vary based on your drive system and power system
 const byte TURNSPEED = 70;
+
+// Set isLeftStickDrive to true for driving  with the left stick
+// Set isLeftStickDrive to false for driving with the right stick (legacy and original configuration)
+boolean isLeftStickDrive = true; 
+
 // If using a speed controller for the dome, sets the top speed. You'll want to vary it potenitally
 // depending on your motor. My Pittman is really fast so I dial this down a ways from top speed.
 // Use a number up to 127 for serial
@@ -69,7 +83,6 @@ const byte RAMPING = 5;
 const byte DOMEDEADZONERANGE = 20;
 const byte DRIVEDEADZONERANGE = 20;
 
-
 // Set the baude rate for the Sabertooth motor controller (feet)
 // 9600 is the default baud rate for Sabertooth packet serial.
 // for packetized options are: 2400, 9600, 19200 and 38400. I think you need to pick one that works
@@ -81,8 +94,18 @@ const int SABERTOOTHBAUDRATE = 9600;
 // and I think it varies across different firmware versions.
 const int DOMEBAUDRATE = 2400;
 
+// Default sound volume at startup
+// 0 = full volume, 255 off
+byte vol = 20;
 
-// I have a pin set to pull a relay high/low to trigger my upside down compressed air like R2's extinguisher
+
+// Automation Delays
+// set automateDelay to min and max seconds between sounds
+byte automateDelay = random(5, 20); 
+//How much the dome may turn during automation.
+int turnDirection = 20;
+
+// Pin number to pull a relay high/low to trigger my upside down compressed air like R2's extinguisher
 #define EXTINGUISHERPIN 3
 
 #include <Sabertooth.h>
@@ -101,26 +124,30 @@ Sabertooth Syren10(128, Serial2);
 #endif
 
 // Set some defaults for start up
-// 0 = full volume, 255 off
-byte vol = 20;
-// 0 = drive motors off ( right stick disabled ) at start
+// false = drive motors off ( right stick disabled ) at start
 boolean isDriveEnabled = false;
 
-// Automated function variables
+// Automated functionality
 // Used as a boolean to turn on/off automated functions like periodic random sounds and periodic dome turns
 boolean isInAutomationMode = false;
 unsigned long automateMillis = 0;
-byte automateDelay = random(5, 20); // set this to min and max seconds between sounds
-//How much the dome may turn during automation.
-int turnDirection = 20;
 // Action number used to randomly choose a sound effect or a dome turn
 byte automateAction = 0;
+
+
 int driveThrottle = 0;
-int rightStick = 0;
+int throttleStickValue = 0;
 int domeThrottle = 0;
 int turnThrottle = 0;
 
 boolean firstLoadOnConnect = false;
+
+AnalogHatEnum throttleAxis;
+AnalogHatEnum turnAxis;
+AnalogHatEnum domeAxis;
+ButtonEnum speedSelectButton;
+ButtonEnum hpLightToggleButton;
+
 
 // this is legacy right now. The rest of the sketch isn't set to send any of this
 // data to another arduino like the original Padawan sketch does
@@ -177,8 +204,23 @@ void setup() {
   mp3Trigger.setup();
   mp3Trigger.setVolume(vol);
 
+  if(isLeftStickDrive) {
+    throttleAxis = LeftHatY;
+    turnAxis = LeftHatX;
+    domeAxis = RightHatX;
+    speedSelectButton = L3;
+    hpLightToggleButton = R3;
 
-  // Start I2C Bus. The body is the master.
+  } else {
+    throttleAxis = RightHatY;
+    turnAxis = RightHatX;
+    domeAxis = LeftHatX;
+    speedSelectButton = R3;
+    hpLightToggleButton = L3;
+  }
+
+
+ // Start I2C Bus. The body is the master.
   Wire.begin();
 
   //Serial.begin(115200);
@@ -438,8 +480,9 @@ void loop() {
     }
   }
 
-  // turn hp light on & off with Left Analog Stick Press (L3)
-  if (Xbox.getButtonClick(L3, 0))  {
+  // turn hp light on & off with Right Analog Stick Press (R3) for left stick drive mode
+  // turn hp light on & off with Left Analog Stick Press (L3) for right stick drive mode
+  if (Xbox.getButtonClick(hpLightToggleButton, 0))  {
     // if hp light is on, turn it off
     if (isHPOn) {
       isHPOn = false;
@@ -455,10 +498,11 @@ void loop() {
   }
 
 
-  // Change drivespeed if drive is eabled
-  // Press Right Analog Stick (R3)
+  // Change drivespeed if drive is enabled
+  // Press Left Analog Stick (L3) for left stick drive mode
+  // Press Right Analog Stick (R3) for right stick drive mode
   // Set LEDs for speed - 1 LED, Low. 2 LED - Med. 3 LED High
-  if (Xbox.getButtonClick(R3, 0) && isDriveEnabled) {
+  if (Xbox.getButtonClick(speedSelectButton, 0) && isDriveEnabled) {
     //if in lowest speed
     if (drivespeed == DRIVESPEED1) {
       //change to medium speed and play sound 3-tone
@@ -483,31 +527,32 @@ void loop() {
   }
 
 
+ 
   // FOOT DRIVES
   // Xbox 360 analog stick values are signed 16 bit integer value
   // Sabertooth runs at 8 bit signed. -127 to 127 for speed (full speed reverse and  full speed forward)
   // Map the 360 stick values to our min/max current drive speed
-  rightStick = (map(Xbox.getAnalogHat(RightHatY, 0), -32768, 32767, -drivespeed, drivespeed));
-  if (rightStick > -DRIVEDEADZONERANGE && rightStick < DRIVEDEADZONERANGE) {
+  throttleStickValue = (map(Xbox.getAnalogHat(throttleAxis, 0), -32768, 32767, -drivespeed, drivespeed));
+  if (throttleStickValue > -DRIVEDEADZONERANGE && throttleStickValue < DRIVEDEADZONERANGE) {
     // stick is in dead zone - don't drive
     driveThrottle = 0;
   } else {
-    if (driveThrottle < rightStick) {
-      if (rightStick - driveThrottle < (RAMPING + 1) ) {
+    if (driveThrottle < throttleStickValue) {
+      if (throttleStickValue - driveThrottle < (RAMPING + 1) ) {
         driveThrottle += RAMPING;
       } else {
-        driveThrottle = rightStick;
+        driveThrottle = throttleStickValue;
       }
-    } else if (driveThrottle > rightStick) {
-      if (driveThrottle - rightStick < (RAMPING + 1) ) {
+    } else if (driveThrottle > throttleStickValue) {
+      if (driveThrottle - throttleStickValue < (RAMPING + 1) ) {
         driveThrottle -= RAMPING;
       } else {
-        driveThrottle = rightStick;
+        driveThrottle = throttleStickValue;
       }
     }
   }
 
-  turnThrottle = map(Xbox.getAnalogHat(RightHatX, 0), -32768, 32767, -TURNSPEED, TURNSPEED);
+  turnThrottle = map(Xbox.getAnalogHat(turnAxis, 0), -32768, 32767, -TURNSPEED, TURNSPEED);
 
   // DRIVE!
   // right stick (drive)
@@ -523,7 +568,7 @@ void loop() {
   }
 
   // DOME DRIVE!
-  domeThrottle = (map(Xbox.getAnalogHat(LeftHatX, 0), -32768, 32767, DOMESPEED, -DOMESPEED));
+  domeThrottle = (map(Xbox.getAnalogHat(domeAxis, 0), -32768, 32767, DOMESPEED, -DOMESPEED));
   if (domeThrottle > -DOMEDEADZONERANGE && domeThrottle < DOMEDEADZONERANGE) {
     //stick in dead zone - don't spin dome
     domeThrottle = 0;
