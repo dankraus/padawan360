@@ -317,6 +317,8 @@ Some users had experienced some issues of sounds freezing up and going a bit hay
 
 If the wrong sounds are playing for button presses, they are likely added to the SD card in the wrong order. They must be put on the card in the exact order one at a time or by using Drivesort. Reference [this video](https://youtu.be/UsMI2gW7Q40) for how load the sound files up with Drivesort to ensure they're loaded onto the SD Card in proper order.
 
+Loading the sound files must be done with a Windows PC. Unfortunately, MacOS will leave some helper index files to inprove OS features like Spotlight and other assorted MacOS specific things. If anyone has done this on a Mac, please let me know!! Likely this can be done on Linux, but I've yet to do it personally. If you have, please let me know.
+
 ### Dome
 
 _**My Dome just randomly spins! My Dome won't spin! My Dome doesn't spin correctly** etc etc.._
