@@ -287,7 +287,7 @@ Press guide button to turn on the controller.
 
 Press Start button to engage motors!
 
-Drive stick is now on the LEFT STICK and dome control is on the RIGHT STICK.
+Drive stick is now (as of 2019-11-01) on the LEFT STICK and dome control is on the RIGHT STICK.
 They have been reversed from what is seen in the below controller guide.
 Set `isLeftStickDrive` in the code to false to drive with the RIGHT STICK as seen in the guide.
 
