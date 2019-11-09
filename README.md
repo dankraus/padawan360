@@ -32,7 +32,7 @@ Still to come - servo control.
   - [Options, Configurations, and Settings](#options--configurations--and-settings)
   - [Teeces Logics](#teeces-logics)
   - [HoloProjectors I2C](#holoprojectors-i2c)
-  - [Video Guide](#video-guide]
+  - [Video Guide](#video-guide)
 - [Controls](#controls)
   - [Controller LED Status](#controller-led-status)
   - [Button Guide](#button-guide)
