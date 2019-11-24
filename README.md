@@ -56,7 +56,7 @@ I developed Padawan360 (named with permission from DanF) to use some more easily
 
 A lot of the instructions here are relevant to the original [Padawan PS2](http://astromech.net/droidwiki/index.php?title=PADAWAN) setup instructions. A good chunk of the documentation is reproduced here.
 
-It is strongly recommended that you read this guide completely a few times before plugging things in or trying to run things.
+It is strongly recommended that you read this guide completely a few times before plugging things in or trying to run things. You should also review the code to get familiar with some of the options available to adjust.
 
 [The thread on Astromech for Padawan360 can be found here ](http://astromech.net/forums/showthread.php?t=19263_)
 
@@ -332,7 +332,7 @@ Loading the sound files must be done with a Windows PC. Unfortunately, MacOS wil
 
 _**My Dome just randomly spins! My Dome won't spin! My Dome doesn't spin correctly** etc etc.._
 
-Depending on the firmware on the Syren, sometimes you need to change the serial baud rate it communicates at. Change this like `const int DOMEBAUDRATE = 2400;` For packetized options are: 2400, 9600, 19200 and 38400
+Depending on the firmware on the Syren, sometimes you need to change the serial baud rate it communicates at. Change this line in the code: `const int DOMEBAUDRATE = 2400;` For packetized options are: 2400, 9600, 19200 and 38400
 
 _**The dome spins in the wrong direction when I move the dome control stick!**_
 
