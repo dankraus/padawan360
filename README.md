@@ -58,6 +58,8 @@ A lot of the instructions here are relevant to the original [Padawan PS2](http:/
 
 It is strongly recommended that you read this guide completely a few times before plugging things in or trying to run things. You should also review the code to get familiar with some of the options available to adjust.
 
+Note: this does NOT work with an Xbox One controller. Xbox One controllers use different wireless protocols. 
+
 [The thread on Astromech for Padawan360 can be found here ](http://astromech.net/forums/showthread.php?t=19263_)
 
 ## Components
@@ -80,9 +82,9 @@ For the body. Main Arduino that runs everything. Receivers, code, connection to 
 
 - ### Xbox 360 Wireless USB Receiver
 
-  You can probably source this from Best Buy or something local but it's available on [NewEgg here](http://www.newegg.com/Product/Product.aspx?Item=0NS-000Z-00003)
+  You may be able to source this from Best Buy, GameStop, or something local. It's available on [New Egg](https://www.newegg.com/p/pl?d=microsoft+xbox+360+usb+receiver).
       
-  I bought a generic one from Microcenter that works fine. Some users have gotten cheap ones from Ebay from off-brands that did not function. I highly recommend buying 1st party official Microsoft receiver. Your mileage may vary with off-brand components here.
+  I bought a generic one from Microcenter that works fine. Some users have gotten cheap ones from Ebay or other non-official/off-brands that did not function. I highly recommend buying 1st party official Microsoft receiver. Your mileage may vary with off-brand components here. If you are having problems pairing, and you've gone through the troubleshooting steps and you are not using an official receiver, it's likely the culprit. 
 
 - ### Xbox 360 Wireless Controller
 
@@ -246,6 +248,8 @@ If you're using 5v to power some components on your I2C device chain, you can us
 
 Install the libraries from the Libraries folder. Upload the corresponding padawan360_body sketch from the `padawan360_body` folder for your Arduino (UNO or Mega) sketch to the Arduino. There is one for the UNO and one for the Mega.
 
+Review the sketch as there are some configuration options at the top of the sketch with descriptive comments that you may want to adjust to control speed levels, turn speed,
+
 #### I2C
 
 This is optional. If you want to trigger light effects in the dome via slipring, connect A4 SLC to SLC on the slipring board and A5 SDA on the Arduino to SDA on the slipring board.
@@ -324,11 +328,15 @@ Not triggering sound or getting any movement? Make sure you're paired. The best 
 
 Press buttons, do you see the button names output? If you don't, you're not paired. If it's paired, you'll see the button names in the serial monitor as you press them.
 
+### Pairing
+_**My controller and receiver won't pair. I don't see any output in the serial monitor in the Xbox Recv test sketch**_
+Confirm that you are using an official Xbox 360 Wireless Controller and Xbox 360 Wireless USB Receiver. If you're not, it's likely the culprit.
+
 ### Sound
 
-If the MP3 Trigger isn't functioning as expected, or at all, or just behaving a little "odd" - it would be good to make sure you have the most up to date firmware. Version 2.54 is known to work. It can be downloaded [here ](http://robertsonics.com/mp3-trigger-downloads/). The user manual has instruction for installation on the last page (as of this writing) of the instruction manual under "Bootloader". The manual is available from the previous link and also available directly [here](http://robertsonics.com/resources/mp3trigger/MP3TriggerV2UserGuide_2012-02-04.pdf)
+If the MP3 Trigger isn't functioning as expected, or at all, or just behaving a little "odd" - it would be good to make sure you have the most up to date firmware. Version 2.54 is known to work. It can be downloaded [here ](http://robertsonics.com/mp3-trigger-downloads/). The user manual has instruction for installation on the last page (as of this writing) of the instruction manual under "Bootloader". The manual is available from the previous link and also available directly [here](http://robertsonics.com/resources/mp3trigger/MP3TriggerV2UserGuide_2012-02-04.pdf). As of 2020, you're not likely to run into this unless you happened to buy really old inventory or a spare from another builder that had one laying around for years.
 
-Some users had experienced some issues of sounds freezing up and going a bit haywire. It was resolved by using the barrel jack power connector as the Mp3Trigger was browning out. That means that disconnecting the 5v and Ground pins between the Arduino and MP3Trigger and switching flip the switch to EXT.
+Some users had experienced some issues of sounds freezing up and going a bit haywire. It was resolved by using the barrel jack power connector as the Mp3Trigger was browning out. That means that disconnecting the 5v and Ground pins between the Arduino and MP3Trigger and switching flip the switch to EXT. This is indicative of power brown outs or some other electrical issue.
 
 If the wrong sounds are playing for button presses, they are likely added to the SD card in the wrong order. They must be put on the card in the exact order one at a time or by using Drivesort. Reference [this video](https://youtu.be/UsMI2gW7Q40) for how load the sound files up with Drivesort to ensure they're loaded onto the SD Card in proper order.
 
@@ -347,7 +355,7 @@ on the stick makes the dome spin left and right on the stick makes the some spin
 
 _**The left analog stick is centered but the dome still spins!**_
 
-You need to just adjust the deadzone `const byte DOMEDEADZONERANGE = 20;` Increase this number until you can let the stick go neutral and nothing moves. The code has some more info on that above that line.
+You need to just adjust the deadzone `const byte DOMEDEADZONERANGE = 20;` Increase this number until you can let the stick go neutral and nothing moves. The sketch has some more info on that above setting that value to adjust for controller stick drift.
 
 ### Drives
 
@@ -357,9 +365,9 @@ People often regularly run into this once they power everything up and find that
 
 Orient your controls from the perspective of the droid. Stand behind the droid so that pressing left on the drive stick makes the droid turn left, right on the stick makes the droid turn right, up on the stick makes the droid drive forward, down on the stick makes the droid drive backwards.
 
-_**Q:** The right analog stick is centered but it still drives(turns, drives forward, drives reverse, etc)!_
+_**The right analog stick is centered but it still drives(turns, drives forward, drives reverse, etc)!**_
 
-**A:** You need to just adjust the deadzone `const byte DRIVEDEADZONERANGE = 20;` Increase this number until you can let the stick go neutral and nothing moves. The code has some more info on that above that line.
+You need to just adjust the deadzone `const byte DRIVEDEADZONERANGE = 20;` Increase this number until you can let the stick go neutral and nothing moves. The sketch has some more info on that above setting that value to adjust for controller stick drift.
 
 ## Coming Soon
 
