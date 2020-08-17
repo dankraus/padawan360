@@ -125,7 +125,7 @@ For the body. Main Arduino that runs everything. Receivers, code, connection to 
 
 Be sure you have the latest version of the Arduino IDE installed available [here at the Arduino website](https://www.arduino.cc/en/Main/Software).
 
-Installing libraries and using the Arduino IDE is beyond the scope of this documentation. Refer to the Arduino website's documentation for how to install libraries and upload software to your Arduino.
+Installing libraries and using the Arduino IDE is beyond the scope of this documentation. Refer to the Arduino website's documentation for how to install libraries and upload software to your Arduino here https://www.arduino.cc/en/Guide and here https://www.arduino.cc/en/guide/libraries#toc5 . Note, you do not need to include the libraries in your sketch as the code to include them is already there. They simply need to be installed so that the Arduino IDE software can find them when compiling the sketch.
 
 ### USB Shield
 
@@ -305,6 +305,12 @@ Set `isLeftStickDrive` in the code to false to drive with the RIGHT STICK as see
 (Button layout image courtesy of LarryJ on Astromech. Thanks!)
 
 ## Troubleshooting and FAQs
+
+### Arduino IDE
+
+_**When I try to upload the sketch I get an error like: sabertooth.h: No such file or directory OR somefile: No such file or directory**_
+The libraries included in this repository need to be installed. Instructions on how to install Arduino libraries is beyond the scope of this documentation. Refer to the official Arduino documentation here: https://www.arduino.cc/en/guide/libraries#toc5
+
 
 ### General Control Issues
 
