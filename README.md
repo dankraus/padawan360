@@ -364,6 +364,11 @@ You need to just adjust the deadzone `const byte DOMEDEADZONERANGE = 20;` Increa
 
 ### Drives
 
+_**I've wired up my Sabertooth but it doesn't move!**_
+
+Don't forget to press START on the controller to enable the motors. Still not working? Put a multimeter to the terminals for a motor and push forward on the stick (after enabling the motor controls of course by pressing START). The voltage should go from 0v to something near the voltage of the power supplies from your battery. Ex, Speed 1 on a 12v battery may show 7v when p
+Stick pushed forward all the way. Speed 3 may show closer to 12v. If you're not getting any voltage at the terminals, check the baud rate in the code, dip switches, and for correct wiring. 
+
 _**When I press left on the drive stick, it turns to the right (or vice versa)! When I push forward on the drive stick it drives backwards (or vice versa)!**_
 
 People often regularly run into this once they power everything up and find that they push forward on the stick and it drives to left, stick to the left drives drives backwards, etc. Don't fret, motors can be wired positive/negative. It doesn't matter. Start flipping the motor connections to the Sabertooth. First flip M1A and M1B. If that doesn't fix it, flip it back and try the other. If it still isn't right, then try flipping both sets. R2 is driven like a tank. Spin the right motor forward to go left, left motor forward to go right. Both motors forward, drive forward. Keep that in mind as you troubleshoot.
