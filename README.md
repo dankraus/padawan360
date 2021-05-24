@@ -366,8 +366,7 @@ You need to just adjust the deadzone `const byte DOMEDEADZONERANGE = 20;` Increa
 
 _**I've wired up my Sabertooth but it doesn't move!**_
 
-Don't forget to press START on the controller to enable the motors. Still not working? Put a multimeter to the terminals for a motor and push forward on the stick (after enabling the motor controls of course by pressing START). The voltage should go from 0v to something near the voltage of the power supplies from your battery. Ex, Speed 1 on a 12v battery may show 7v when p
-Stick pushed forward all the way. Speed 3 may show closer to 12v. If you're not getting any voltage at the terminals, check the baud rate in the code, dip switches, and for correct wiring. 
+Don't forget to press START on the controller to enable the motors. Still not working? Put a multimeter to the terminals for a motor and push forward on the stick (after enabling the motor controls of course by pressing START). The voltage should go from 0v to something near the voltage of the power supplies from your battery. Ex, Speed 1 on a 12v battery may show 7v when stick is pushed forward all the way. Speed 3 may show closer to 12v. If you're not getting any voltage at the terminals, check the baud rate in the code, dip switches, and for correct wiring. 
 
 _**When I press left on the drive stick, it turns to the right (or vice versa)! When I push forward on the drive stick it drives backwards (or vice versa)!**_
 
