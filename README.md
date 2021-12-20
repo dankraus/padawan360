@@ -1,6 +1,6 @@
 # Padawan360
 
-Still to come - servo control.
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/dankraus)
 
 - [Padawan360](#padawan360)
 - [Intro](#intro)
