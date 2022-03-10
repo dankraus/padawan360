@@ -151,7 +151,7 @@ Connect the following pins from the MP3 Trigger to the Body Arduino
 
 **There is a small switch at the bottom of the board labled USB - EXT, make sure that it is pointing to the USB side in order to power it via the Arduino**
 
-In order to load the sounds onto the MP3 Trigger, you will need to grab the sounds files either from [here](http://host-a.net/u/DanF/Padawan_R2_sounds.zip) or [here](http://www.tjcomputers.us/padawan/Padawan_R2_sounds.zip)
+In order to load the sounds onto the MP3 Trigger, you will need to grab the sounds files either from [here](https://drive.google.com/drive/folders/19-NO-B2NIjAVUvo6hy9pTMNdYRaIFusJ)
 
 Connect the Micro SD card to your computer and upload the files one by one in the numbered order. If you don't do this, you will not be able to control which sound files are triggered. It's picky about file names and ordering. It's annoying but really, do transfer them over one file at a time. You can also use a Windows program called Drivesort to help out here too. Here's a [helpful video from builder Balders on how to load the sounds with Drivesort](https://youtu.be/UsMI2gW7Q40)
 
