@@ -62,6 +62,10 @@ Note: this does NOT work with an Xbox One controller. Xbox One controllers use d
 
 [The thread on Astromech for Padawan360 can be found here ](http://astromech.net/forums/showthread.php?t=19263_)
 
+## Contributing
+
+There are quite a few forks either on GitHub, circulating around via email attachments, Google Drive, etc. I'm open to contributions. Please either open an issue, contact me, open a PR, etc. If there's a change you want to see, likely others will benefit as well. The caveat is that the changes need to be generic enough for the average new builder to use and benefit from. If you want to include new and alternate libraries for sound boards, motor drivers, etc, then do so, but wrap them in flags or something so that the compiled sketch is small and effecient still to fit on devices. We already have two Mega and Uno sketches (which arguable could be combined into one), I'd prefer not to add more to manage.
+
 ## Components
 
 - ### Arduino Mega (Option 1 and Recommended!)
@@ -76,7 +80,7 @@ For the body. Main Arduino that runs everything. Receivers, code, connection to 
 
   Sourced from [Circuits@Home](https://www.circuitsathome.com/products-page/arduino-shields). They've shuffled their links around. Find it on that link labeled "USB Host Shield 2.0 for Arduino – Assembled". They used to offer it assembled and unassembled but as of this writing, they just have it assembled.
 
-  If Amazon is your thing Sainsmart has a USB Host Shield that has been found to be compatible with Padawan360 (Prime elligble!) SainSmart USB Shield](http://www.amazon.com/SainSmart-Compatible-HOST-Shield-Arduino/dp/B006J4G000/ref=sr_1_1?ie=UTF8&qid=1420994477&sr=8-1&keywords=usb+host+shield+2.0+for+arduino). _NOTE_ I've seen that some SainSmart isn't sending them with the 2x3 headers that connects the shield to the Arduino board together. This connection is absolutely necessary for the Arduino to talk to the shield over serial (ISCP pins). It will NOT work without this connection. Real dumb. The shield is basically useless without the connection. I spent a while a DroidCon trying to help someone it before realizing that was missing and it's absolutely necessary. You can grab 2x3 headers from Sparkfun for 50 cents. The missing headers seem to be a common issue as the Aamazon reviews are rife with that complaint.
+  If Amazon is your thing Sainsmart has a USB Host Shield that has been found to be compatible with Padawan360 (Prime elligble!) SainSmart USB Shield](http://www.amazon.com/SainSmart-Compatible-HOST-Shield-Arduino/dp/B006J4G000/ref=sr_1_1?ie=UTF8&qid=1420994477&sr=8-1&keywords=usb+host+shield+2.0+for+arduino). _NOTE_ I've seen that some SainSmart Shields aren't sending them with the 2x3 headers that connects the shield to the Arduino board together. This connection is absolutely necessary for the Arduino to talk to the shield over serial (ISCP pins). It will NOT work without this connection. Real dumb. The shield is basically useless without the connection. I spent a while a DroidCon trying to help someone it before realizing that was missing and it's absolutely necessary. You can grab 2x3 headers from Sparkfun for 50 cents. The missing headers seem to be a common issue as the Aamazon reviews are rife with that complaint. Check your particular USB Host Shield to see if the headers are there. The production may have been corrected.
 
 Your USB Shield may need voltage pins jumped. See Steve Baudain's YouTube video here walking through it: https://www.youtube.com/watch?v=y9HEeBO3cV0
 
