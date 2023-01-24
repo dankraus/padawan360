@@ -1,6 +1,14 @@
 # Padawan360
 
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/dankraus)
+## Donations
+
+Instead of offering to buy me a beer at the next convention, please consider making a donation to Make-a-Wish, your local foodback, or other local charity that helps kids in need. Drop me a note saying you did and I'll be grateful. We spend quite a bit of money on this hobby and even if you plan on doing some charitable events with your droid in the future, please send a few dollars and put it to an immediate good.
+
+The R2/Droid Builders have a long history of raising money for groups like Make-A-Wish.
+
+[Donate to Make-A-Wish](https://wish.org/)
+
+## Contents
 
 - [Padawan360](#padawan360)
 - [Intro](#intro)
