@@ -2,9 +2,9 @@
 
 ## Donations
 
-Instead of offering to buy me a beer at the next convention, please consider making a donation to Make-a-Wish, your local foodback, or other local charity that helps kids in need. Drop me a note saying you did and I'll be grateful. We spend quite a bit of money on this hobby and even if you plan on doing some charitable events with your droid in the future, please send a few dollars and put it to an immediate good.
+Instead of offering to buy me a beer at the next convention, please consider making a donation to [Make-a-Wish](https://wish.org/), your local foodback, or other local charity that helps kids in need. Drop me a note saying you did and I'll be grateful. We spend quite a bit of money on this hobby and even if you plan on doing some charitable events with your droid in the future, please send a few dollars and put it to an immediate good.
 
-The R2/Droid Builders have a long history of raising money for groups like Make-A-Wish.
+The R2/Droid Builders have a long history of raising money for groups like [Make-A-Wish](https://wish.org/).
 
 [Donate to Make-A-Wish](https://wish.org/)
 
