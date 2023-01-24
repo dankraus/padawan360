@@ -58,7 +58,7 @@ A lot of the instructions here are relevant to the original [Padawan PS2](http:/
 
 It is strongly recommended that you read this guide completely a few times before plugging things in or trying to run things. You should also review the code to get familiar with some of the options available to adjust.
 
-Note: this does NOT work with an Xbox One controller. Xbox One controllers use different wireless protocols. 
+Note: this does NOT work with an Xbox One controller. Xbox One controllers use different wireless protocols.
 
 [The thread on Astromech for Padawan360 can be found here ](http://astromech.net/forums/showthread.php?t=19263_)
 
@@ -72,27 +72,25 @@ I run a Mega for the body. It uses the hardware serial pins to connect to the mo
 
 For the body. Main Arduino that runs everything. Receivers, code, connection to MP3 trigger, etc runs through here. SparkFun, RadioShack, Amazon, you can find these everywhere these days.
 
-
-
 - ### USB Shield
 
   Sourced from [Circuits@Home](https://www.circuitsathome.com/products-page/arduino-shields). They've shuffled their links around. Find it on that link labeled "USB Host Shield 2.0 for Arduino – Assembled". They used to offer it assembled and unassembled but as of this writing, they just have it assembled.
 
-  If Amazon is your thing Sainsmart has a USB Host Shield that has been found to be compatible with Padawan360 (Prime elligble!) SainSmart USB Shield](http://www.amazon.com/SainSmart-Compatible-HOST-Shield-Arduino/dp/B006J4G000/ref=sr_1_1?ie=UTF8&qid=1420994477&sr=8-1&keywords=usb+host+shield+2.0+for+arduino). *NOTE* I've seen that some SainSmart isn't sending them with the 2x3 headers that connects the shield to the Arduino board together. This connection is absolutely necessary for the Arduino to talk to the shield over serial (ISCP pins). It will NOT work without this connection. Real dumb. The shield is basically useless without the connection. I spent a while a DroidCon trying to help someone it before realizing that was missing and it's absolutely necessary. You can grab 2x3 headers from Sparkfun for 50 cents. The missing headers seem to be a common issue as the Aamazon reviews are rife with that complaint.
+  If Amazon is your thing Sainsmart has a USB Host Shield that has been found to be compatible with Padawan360 (Prime elligble!) SainSmart USB Shield](http://www.amazon.com/SainSmart-Compatible-HOST-Shield-Arduino/dp/B006J4G000/ref=sr_1_1?ie=UTF8&qid=1420994477&sr=8-1&keywords=usb+host+shield+2.0+for+arduino). _NOTE_ I've seen that some SainSmart isn't sending them with the 2x3 headers that connects the shield to the Arduino board together. This connection is absolutely necessary for the Arduino to talk to the shield over serial (ISCP pins). It will NOT work without this connection. Real dumb. The shield is basically useless without the connection. I spent a while a DroidCon trying to help someone it before realizing that was missing and it's absolutely necessary. You can grab 2x3 headers from Sparkfun for 50 cents. The missing headers seem to be a common issue as the Aamazon reviews are rife with that complaint.
 
 Your USB Shield may need voltage pins jumped. See Steve Baudain's YouTube video here walking through it: https://www.youtube.com/watch?v=y9HEeBO3cV0
 
 - ### Xbox 360 Wireless USB Receiver
 
   You may be able to source this from Best Buy, GameStop, or something local. It's available on [New Egg](https://www.newegg.com/p/pl?d=microsoft+xbox+360+usb+receiver).
-      
+
   I bought a generic one from Microcenter that works fine. Some users have gotten cheap ones from Ebay or other non-official/off-brands that did not function. I highly recommend buying 1st party official Microsoft receiver. Your mileage may vary with off-brand components here. If you are having problems pairing, and you've gone through the troubleshooting steps and you are not using an official receiver, it's likely the culprit.
 
 Some people have had luck making some adjustments to get some 3rd Party receivers working. Your mileage may vary so try to obtain first party first. Read up on it here: https://astromech.net/droidwiki/Cheap_XBox_Receivers
 
 - ### Xbox 360 Wireless Controller
 
-  [Controller via Amazon](http://www.amazon.com/Xbox-360-Wireless-Controller-Glossy-Black/dp/B003ZSP0WW).  I have a nice blue one to match R2 personally ;) Like the USB Receiver, I highly recommend buying a 1st party official Microsoft controller. I know one user bought one cheap on Ebay and it didn't even have a sync button and there was no X on the center Home button. Your mileage may vary with off-brand components here.
+  [Controller via Amazon](http://www.amazon.com/Xbox-360-Wireless-Controller-Glossy-Black/dp/B003ZSP0WW). I have a nice blue one to match R2 personally ;) Like the USB Receiver, I highly recommend buying a 1st party official Microsoft controller. I know one user bought one cheap on Ebay and it didn't even have a sync button and there was no X on the center Home button. Your mileage may vary with off-brand components here.
 
   **Note:** I have seen the controller bundled with the USB receiver together. It was in the gaming peripheals department in my local Microcenter. It's marketed for PC gaming. Nice to get it in one package if you can if you don't have an extra 360 controller to spare.
 
@@ -102,7 +100,7 @@ Some people have had luck making some adjustments to get some 3rd Party receiver
 
 - ### Sabertooth Motor Controller - Feet
 
-  Depending on your motors you'll want a  [Sabertooth 2x32](https://www.dimensionengineering.com/products/sabertooth2x32), [Sabertooth 2x25](https://www.dimensionengineering.com/products/sabertooth2x25) or [2x12](https://www.dimensionengineering.com/products/sabertooth2x12). The 2x32 and the 2x24 seem to be crossing over price point. Might as well get the 2x32 if you're buying brand new. There's some additional bells and whistles in the 32 and can be programmed via Dimension Engineering's software, but some of those usefuls features are handled in the code, like for speed Ramping for example. My styrene droid with Jaycar motors uses 2x12. Most people tend to use 2x25 or 2x32 for scooter motors and NPC motors. Consult with Dimension Engineering to make sure you get the right one you need. Either one will work with the code
+  Depending on your motors you'll want a [Sabertooth 2x32](https://www.dimensionengineering.com/products/sabertooth2x32), [Sabertooth 2x25](https://www.dimensionengineering.com/products/sabertooth2x25) or [2x12](https://www.dimensionengineering.com/products/sabertooth2x12). The 2x32 and the 2x24 seem to be crossing over price point. Might as well get the 2x32 if you're buying brand new. There's some additional bells and whistles in the 32 and can be programmed via Dimension Engineering's software, but some of those usefuls features are handled in the code, like for speed Ramping for example. My styrene droid with Jaycar motors uses 2x12. Most people tend to use 2x25 or 2x32 for scooter motors and NPC motors. Consult with Dimension Engineering to make sure you get the right one you need. Either one will work with the code
 
 - ### Syren Motor Controller - Dome
 
@@ -119,7 +117,7 @@ Some people have had luck making some adjustments to get some 3rd Party receiver
 - #### Optional
 
   - ##### RSeries RGB HPs.
-  
+
     Sketches provided are for I2C holoprojector boards. The front uses the one with the servo pinouts although the sketch doesn't servo control of the HPs. The top and rear HP are just the regular I2C controlled boards.
 
   - ##### Slipring
@@ -131,7 +129,7 @@ Some people have had luck making some adjustments to get some 3rd Party receiver
 
 Be sure you have the latest version of the Arduino IDE installed available [here at the Arduino website](https://www.arduino.cc/en/Main/Software) and install the libraries included in this repository from the `libraries` folder.
 
-Installing libraries and using the Arduino IDE is beyond the scope of this documentation. Refer to the Arduino website's documentation for how to install libraries and upload software to your Arduino here https://www.arduino.cc/en/Guide and here https://www.arduino.cc/en/guide/libraries#toc5 . Note, you do not need to include the libraries in your sketch as the code to include them is already there. They simply need to be installed so that the Arduino IDE software can find them when compiling the sketch.
+Installing libraries and using the Arduino IDE is beyond the scope of this documentation. Refer to the Arduino website's documentation for how to install libraries and upload software to your Arduino here https://www.arduino.cc/en/Guide and here https://www.arduino.cc/en/guide/libraries#toc5 . Note, you do not need to include the library references (ex: `#include <Sabertooth.h>`) directly in your sketch as the code to include them is already there. They simply need to be installed so that the Arduino IDE software can find them when compiling the sketch. The libraries are provided as zip files to make for easy installation.
 
 ### USB Shield
 
@@ -283,6 +281,7 @@ Mike Erwin put out some great boards with Arduino bootloaders on them. Programma
 ### Video Guide
 
 Builder Steve Baudains has put together a few videos walking through setup of the main components.
+
 - [Video 1](https://www.youtube.com/watch?v=oZw0zzCgoh8)
 - [Video 2](https://www.youtube.com/watch?v=wXRDHJttQbc)
 
@@ -319,7 +318,6 @@ Set `isLeftStickDrive` in the code to false to drive with the RIGHT STICK as see
 _**When I try to upload the sketch I get an error like: sabertooth.h: No such file or directory OR somefile: No such file or directory**_
 The libraries included in this repository need to be installed. Instructions on how to install Arduino libraries is beyond the scope of this documentation. Refer to the official Arduino documentation here: https://www.arduino.cc/en/guide/libraries#toc5
 
-
 ### General Control Issues
 
 Not triggering sound or getting any movement? Make sure you're paired. The best way is to use the Xbox Wireless library's example sketch.
@@ -333,7 +331,9 @@ Not triggering sound or getting any movement? Make sure you're paired. The best 
 Press buttons, do you see the button names output? If you don't, you're not paired. If it's paired, you'll see the button names in the serial monitor as you press them.
 
 ### Pairing
+
 _**My controller and receiver won't pair. I don't see any output in the serial monitor in the Xbox Recv test sketch**_
+
 - Confirm that you are using an official Xbox 360 Wireless Controller and Xbox 360 Wireless USB Receiver. If you're not, it's likely the culprit. Get yourself an official one and save yourself some trouble. That said, some people have had luck making some adjustments to get some 3rd Party receivers working. Read up on it here: https://astromech.net/droidwiki/Cheap_XBox_Receivers
 - Your USB Shield may need voltage pins jumped. See Steve Baudain's YouTube video here walking through it: https://www.youtube.com/watch?v=y9HEeBO3cV0
 
@@ -355,7 +355,7 @@ Depending on the firmware on the Syren, sometimes you need to change the serial 
 
 _**The dome spins in the wrong direction when I move the dome control stick!**_
 
-Flip the leads to the dome motor. There is no positive and negative. Orient your controls from the perspective of the droid. Stand behind the droid so that pressing 
+Flip the leads to the dome motor. There is no positive and negative. Orient your controls from the perspective of the droid. Stand behind the droid so that pressing
 on the stick makes the dome spin left and right on the stick makes the some spin right.
 
 _**The left analog stick is centered but the dome still spins!**_
@@ -366,7 +366,7 @@ You need to just adjust the deadzone `const byte DOMEDEADZONERANGE = 20;` Increa
 
 _**I've wired up my Sabertooth but it doesn't move!**_
 
-Don't forget to press START on the controller to enable the motors. Still not working? Put a multimeter to the terminals for a motor and push forward on the stick (after enabling the motor controls of course by pressing START). The voltage should go from 0v to something near the voltage of the power supplies from your battery. Ex, Speed 1 on a 12v battery may show 7v when stick is pushed forward all the way. Speed 3 may show closer to 12v. If you're not getting any voltage at the terminals, check the baud rate in the code, dip switches, and for correct wiring. 
+Don't forget to press START on the controller to enable the motors. Still not working? Put a multimeter to the terminals for a motor and push forward on the stick (after enabling the motor controls of course by pressing START). The voltage should go from 0v to something near the voltage of the power supplies from your battery. Ex, Speed 1 on a 12v battery may show 7v when stick is pushed forward all the way. Speed 3 may show closer to 12v. If you're not getting any voltage at the terminals, check the baud rate in the code, dip switches, and for correct wiring.
 
 _**When I press left on the drive stick, it turns to the right (or vice versa)! When I push forward on the drive stick it drives backwards (or vice versa)!**_
 
