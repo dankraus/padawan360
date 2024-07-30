@@ -363,7 +363,7 @@ Loading the sound files must be done with a Windows PC. Unfortunately, MacOS wil
 
 _**My Dome just randomly spins! My Dome won't spin! My Dome doesn't spin correctly** etc etc.._
 
-Depending on the firmware on the Syren, sometimes you need to change the serial baud rate it communicates at. Change this line in the code: `const int DOMEBAUDRATE = 2400;` For packetized options are: 2400, 9600, 19200 and 38400
+Depending on the firmware on the Syren, sometimes you need to change the serial baud rate it communicates at. Change this line in the code: `const int DOMEBAUDRATE = 9600;` For packetized options are: 2400, 9600, 19200 and 38400
 
 _**The dome spins in the wrong direction when I move the dome control stick!**_
 
