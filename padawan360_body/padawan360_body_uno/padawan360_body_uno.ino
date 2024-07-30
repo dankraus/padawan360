@@ -82,7 +82,7 @@ const byte DRIVEDEADZONERANGE = 20;
 // for packetized options are: 2400, 9600, 19200 and 38400. I think you need to pick one that works
 // and I think it varies across different firmware versions.
 // for simple serial use 9600
-const int DOMEBAUDRATE = 2400;
+const int DOMEBAUDRATE = 9600;
 
 // Comment the SYRENSIMPLE out for packetized serial connection to Syren - Recomended.
 // I've never tested Syrene Simple, it's a carry-over from DanF's library.
