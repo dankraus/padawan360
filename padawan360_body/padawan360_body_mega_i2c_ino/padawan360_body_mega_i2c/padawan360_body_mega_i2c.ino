@@ -92,7 +92,7 @@ const int SABERTOOTHBAUDRATE = 9600;
 // Set the baude rate for the Syren motor controller (dome)
 // for packetized options are: 2400, 9600, 19200 and 38400. I think you need to pick one that works
 // and I think it varies across different firmware versions.
-const int DOMEBAUDRATE = 2400;
+const int DOMEBAUDRATE = 9600;
 
 // Default sound volume at startup
 // 0 = full volume, 255 off
